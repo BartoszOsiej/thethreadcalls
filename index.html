@@ -4,6 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bartosz Osiej — The Stitcher Trilogy</title>
+    <meta name="description" content="The Stitcher Trilogy by Bartosz Osiej — dark literary horror about obsession, silk, and the thin line between art and madness. Three novels. One thread.">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="The Stitcher Trilogy — Bartosz Osiej">
+    <meta property="og:description" content="Dark literary horror about obsession, silk, and the thin line between art and madness. Three novels. One thread.">
+    <meta property="og:image" content="https://bartoszosiej.github.io/thethreadcalls/covers/stitcher.jpg">
+    <meta property="og:url" content="https://bartoszosiej.github.io/thethreadcalls/">
+    <meta property="og:site_name" content="The Stitcher Trilogy">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Stitcher Trilogy — Bartosz Osiej">
+    <meta name="twitter:description" content="Dark literary horror about obsession, silk, and the thin line between art and madness.">
+    <meta name="twitter:image" content="https://bartoszosiej.github.io/thethreadcalls/covers/stitcher.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="covers/author-logo-dark.png">
+    <link rel="apple-touch-icon" href="covers/author-logo-dark.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
@@ -383,6 +402,26 @@
 
         .link.filled::before { background: var(--red-hot); }
 
+        /* ===== KU BADGE ===== */
+        .ku-badge {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 10px 16px;
+            border: 1px solid #1a6b3c;
+            color: #4caf50;
+            background: rgba(26, 107, 60, 0.1);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ku-badge::before {
+            content: '✓';
+            font-size: 12px;
+        }
+
         /* ===== SECTION DIVIDER — the thread between scenes ===== */
         .thread-divider {
             height: 120px;
@@ -587,6 +626,74 @@
             50% { opacity: 1; }
         }
     </style>
+
+    <!-- Noscript fallback: show everything if JS is off -->
+    <noscript>
+        <style>
+            .r { opacity: 1 !important; transform: none !important; }
+            .hero-quote, .hero-attr, .hero-author-name { opacity: 1 !important; transform: none !important; animation: none !important; }
+            .thread { display: none !important; }
+        </style>
+    </noscript>
+
+    <!-- JSON-LD: Book Series + individual books -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BookSeries",
+      "name": "The Stitcher Trilogy",
+      "author": {
+        "@type": "Person",
+        "name": "Bartosz Osiej"
+      },
+      "description": "Dark literary horror about obsession, silk, and the thin line between art and madness.",
+      "url": "https://bartoszosiej.github.io/thethreadcalls/",
+      "hasPart": [
+        {
+          "@type": "Book",
+          "position": 1,
+          "name": "The Stitcher",
+          "isbn": "B0HHY39314",
+          "bookFormat": "https://schema.org/EBook",
+          "url": "https://www.amazon.com/dp/B0HHY39314",
+          "offers": {
+            "@type": "Offer",
+            "price": "6.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          }
+        },
+        {
+          "@type": "Book",
+          "position": 2,
+          "name": "The Curator",
+          "isbn": "B0HHXT2ZRZ",
+          "bookFormat": "https://schema.org/EBook",
+          "url": "https://www.amazon.com/dp/B0HHXT2ZRZ",
+          "offers": {
+            "@type": "Offer",
+            "price": "9.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          }
+        },
+        {
+          "@type": "Book",
+          "position": 3,
+          "name": "The Reckoning",
+          "isbn": "B0GX7CPY7H",
+          "bookFormat": "https://schema.org/EBook",
+          "url": "https://www.amazon.com/dp/B0GX7CPY7H",
+          "offers": {
+            "@type": "Offer",
+            "price": "10.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 <body>    <!-- THE THREAD — grows inside hero only -->
 
@@ -677,6 +784,7 @@
         <div class="spread-links r d5">
             <a href="https://www.amazon.com/gp/product/B0HHY39314?ref_=dbs_m_mng_rwt_calw_tkin_0&storeType=ebooks" class="link filled" target="_blank">Kindle $6.99</a>
             <a href="https://www.amazon.com/dp/B0HHSKMSVH" class="link" target="_blank">Hardcover $24.99</a>
+            <span class="ku-badge r d5">Kindle Unlimited</span>
         </div>
     </div>
 </section>
@@ -727,6 +835,7 @@
         <div class="spread-links r d5">
             <a href="https://www.amazon.com/gp/product/B0HHXT2ZRZ?ref_=dbs_m_mng_rwt_calw_tkin_1&storeType=ebooks" class="link filled" target="_blank">Kindle $9.99</a>
             <a href="https://www.amazon.com/dp/B0HHWR6HLH" class="link" target="_blank">Hardcover $28.99</a>
+            <span class="ku-badge r d5">Kindle Unlimited</span>
         </div>
     </div>
 </section>
@@ -777,6 +886,7 @@
         <div class="spread-links r d5">
             <a href="https://www.amazon.com/gp/product/B0GX7CPY7H?ref_=dbs_m_mng_rwt_calw_tkin_2&storeType=ebooks" class="link filled" target="_blank">Kindle $10.99</a>
             <a href="https://www.amazon.com/dp/B0HHWFZ3B1" class="link" target="_blank">Hardcover $29.99</a>
+            <a href="https://www.amazon.com/dp/B0HHS5Y5FV" class="link" target="_blank">Paperback $18.99</a>
         </div>
     </div>
 </section>
@@ -817,6 +927,24 @@
                 <span class="pl">„Pisze o tym, co się dzieje, gdy nić woła, a ty nie możesz przestać odpowiadać."</span>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- ================================================
+     CONTACT / PRESS
+     ================================================ -->
+<section class="author-scene" style="min-height:auto;padding:80px 24px;">
+    <div style="max-width:600px;margin:0 auto;text-align:center;">
+        <div class="author-label r" style="margin-bottom:16px;">Contact</div>
+        <p class="r d1" style="font-size:1.15rem;font-weight:300;color:var(--cream);line-height:1.8;margin-bottom:24px;">
+            <span class="en">For translation rights, press inquiries, and licensing:<br></span>
+            <span class="pl">W sprawie praw do tłumaczeń, mediów i licencji:<br></span>
+            <a href="mailto:bartosz@osiej.dev" style="color:var(--red-hot);text-decoration:none;border-bottom:1px solid var(--red-dim);transition:border-color 0.3s;">bartosz@osiej.dev</a>
+        </p>
+        <p class="r d2" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--grey);letter-spacing:1px;">
+            <span class="en">Open to charitable translations (1% royalty)</span>
+            <span class="pl">Otwarty na tłumaczenia charytatywne (1% tantiem)</span>
+        </p>
     </div>
 </section>
 
