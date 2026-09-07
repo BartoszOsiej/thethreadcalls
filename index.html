@@ -995,6 +995,8 @@
             <span class="counter-digits" id="counterDigits">00000</span>
         </div>
         &copy; 2026 Bartosz Osiej
+        <span style="margin-left:12px;opacity:0.4;">·</span>
+        <a href="https://github.com/BartoszOsiej" target="_blank" style="color:var(--grey);text-decoration:none;border-bottom:1px solid rgba(90,85,80,0.3);transition:color 0.3s,border-color 0.3s;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;">check my dev stuff</a>
     </div>
 </section>
 
@@ -1033,21 +1035,30 @@
     }
 
     // Visit counter — global, via countapi.mileshilliard.com (no auth)
+    // Bot filter: skip increment for known bot/crawler user-agents
     (function() {
         const COUNTER_KEY = 'thethreadcalls_visits';
         const el = document.getElementById('counterDigits');
-        const api = 'https://countapi.mileshilliard.com/api/v1/hit/' + COUNTER_KEY;
-        fetch(api)
-            .then(r => r.json())
-            .then(data => {
-                if (data.value && el) {
-                    el.textContent = String(data.value).padStart(5, '0');
-                }
-            })
-            .catch(() => {
-                // Fallback: just show dashes if API is down
-                if (el) el.textContent = '-----';
-            });
+        const ua = (navigator.userAgent || '').toLowerCase();
+        const isBot = /bot|crawl|spider|slurp|mediapartners|facebookexternalhit|embedly|quora|preview|linkedReader|wget|curl|python|go-http|java\b|perl|ruby|headless|phantom|semrush|ahrefs|mj12bot|dotbot|yandex|baidu|sogou|exabot|facebot|ia_archiver/.test(ua);
+
+        if (isBot) {
+            // Bot detected: show count but don't increment
+            fetch('https://countapi.mileshilliard.com/api/v1/get/' + COUNTER_KEY)
+                .then(r => r.json())
+                .then(data => {
+                    if (data.value && el) el.textContent = String(data.value).padStart(5, '0');
+                })
+                .catch(() => { if (el) el.textContent = '-----'; });
+        } else {
+            // Human: increment
+            fetch('https://countapi.mileshilliard.com/api/v1/hit/' + COUNTER_KEY)
+                .then(r => r.json())
+                .then(data => {
+                    if (data.value && el) el.textContent = String(data.value).padStart(5, '0');
+                })
+                .catch(() => { if (el) el.textContent = '-----'; });
+        }
     })();
 </script>
 
