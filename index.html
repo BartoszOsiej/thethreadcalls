@@ -402,6 +402,33 @@
 
         .link.filled::before { background: var(--red-hot); }
 
+        /* ===== VISIT COUNTER ===== */
+        .visit-counter {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            padding: 6px 14px;
+            border: 1px solid rgba(155, 27, 27, 0.2);
+            background: rgba(155, 27, 27, 0.05);
+        }
+
+        .counter-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--grey);
+        }
+
+        .counter-digits {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            letter-spacing: 3px;
+            color: var(--red-hot);
+            font-variant-numeric: tabular-nums;
+        }
+
         /* ===== KU BADGE ===== */
         .ku-badge {
             font-family: 'IBM Plex Mono', monospace;
@@ -963,6 +990,10 @@
         </a>
     </div>
     <div class="final-footer">
+        <div class="visit-counter" id="visitCounter">
+            <span class="counter-label">visitors</span>
+            <span class="counter-digits" id="counterDigits">00000</span>
+        </div>
         &copy; 2026 Bartosz Osiej
     </div>
 </section>
@@ -1000,6 +1031,20 @@
         document.documentElement.setAttribute('data-lang', saved);
         document.getElementById('langBtn').textContent = saved === 'en' ? 'PL' : 'EN';
     }
+
+    // Visit counter
+    // Bump count in localStorage (unique per browser)
+    (function() {
+        const KEY = 'stitcher_visits';
+        const ua = navigator.userAgent || '';
+        const isBot = /bot|crawler|spider|curl|wget|python|go-http|java|perl|ruby|headless/i.test(ua);
+        let count = parseInt(localStorage.getItem(KEY) || '0', 10);
+        count++;
+        localStorage.setItem(KEY, count);
+        // Pad to 5 digits
+        const el = document.getElementById('counterDigits');
+        if (el) el.textContent = String(count).padStart(5, '0');
+    })();
 </script>
 
 </body>
