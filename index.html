@@ -1032,18 +1032,22 @@
         document.getElementById('langBtn').textContent = saved === 'en' ? 'PL' : 'EN';
     }
 
-    // Visit counter
-    // Bump count in localStorage (unique per browser)
+    // Visit counter — global, via countapi.mileshilliard.com (no auth)
     (function() {
-        const KEY = 'stitcher_visits';
-        const ua = navigator.userAgent || '';
-        const isBot = /bot|crawler|spider|curl|wget|python|go-http|java|perl|ruby|headless/i.test(ua);
-        let count = parseInt(localStorage.getItem(KEY) || '0', 10);
-        count++;
-        localStorage.setItem(KEY, count);
-        // Pad to 5 digits
+        const COUNTER_KEY = 'thethreadcalls_visits';
         const el = document.getElementById('counterDigits');
-        if (el) el.textContent = String(count).padStart(5, '0');
+        const api = 'https://countapi.mileshilliard.com/api/v1/hit/' + COUNTER_KEY;
+        fetch(api)
+            .then(r => r.json())
+            .then(data => {
+                if (data.value && el) {
+                    el.textContent = String(data.value).padStart(5, '0');
+                }
+            })
+            .catch(() => {
+                // Fallback: just show dashes if API is down
+                if (el) el.textContent = '-----';
+            });
     })();
 </script>
 
