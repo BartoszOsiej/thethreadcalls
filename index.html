@@ -449,6 +449,34 @@
             font-size: 12px;
         }
 
+        /* ===== GP BADGE — Google Play Books, awaiting review ===== */
+        .gp-badge {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 10px 16px;
+            border: 1px solid var(--red-dim);
+            color: var(--grey);
+            background: rgba(90, 85, 80, 0.08);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            transition: all 0.4s ease;
+        }
+
+        .gp-badge::before {
+            content: '◌';
+            font-size: 12px;
+            color: var(--red-hot);
+        }
+
+        .gp-badge:hover {
+            border-color: var(--red-hot);
+            color: var(--cream-hot);
+        }
+
         /* ===== SECTION DIVIDER — the thread between scenes ===== */
         .thread-divider {
             height: 120px;
@@ -812,6 +840,7 @@
             <a href="https://www.amazon.com/gp/product/B0HHY39314?ref_=dbs_m_mng_rwt_calw_tkin_0&storeType=ebooks" class="link filled" target="_blank">Kindle $6.99</a>
             <a href="https://www.amazon.com/dp/B0HHSKMSVH" class="link" target="_blank">Hardcover $24.99</a>
             <span class="ku-badge r d5">Kindle Unlimited</span>
+            <a href="https://play.google.com/store/search?q=The%20Stitcher%20Bartosz%20Osiej&c=books" class="gp-badge r d5" target="_blank"><span class="en">Google Play Books &middot; in review</span><span class="pl">Google Play Books &middot; w weryfikacji</span></a>
         </div>
     </div>
 </section>
@@ -863,6 +892,7 @@
             <a href="https://www.amazon.com/gp/product/B0HHXT2ZRZ?ref_=dbs_m_mng_rwt_calw_tkin_1&storeType=ebooks" class="link filled" target="_blank">Kindle $9.99</a>
             <a href="https://www.amazon.com/dp/B0HHWR6HLH" class="link" target="_blank">Hardcover $28.99</a>
             <span class="ku-badge r d5">Kindle Unlimited</span>
+            <a href="https://play.google.com/store/search?q=The%20Curator%20Bartosz%20Osiej&c=books" class="gp-badge r d5" target="_blank"><span class="en">Google Play Books &middot; in review</span><span class="pl">Google Play Books &middot; w weryfikacji</span></a>
         </div>
     </div>
 </section>
@@ -914,6 +944,8 @@
             <a href="https://www.amazon.com/gp/product/B0GX7CPY7H?ref_=dbs_m_mng_rwt_calw_tkin_2&storeType=ebooks" class="link filled" target="_blank">Kindle $10.99</a>
             <a href="https://www.amazon.com/dp/B0HHWFZ3B1" class="link" target="_blank">Hardcover $29.99</a>
             <a href="https://www.amazon.com/dp/B0HHS5Y5FV" class="link" target="_blank">Paperback $18.99</a>
+            <span class="ku-badge r d5">Kindle Unlimited</span>
+            <a href="https://play.google.com/store/search?q=The%20Reckoning%20Bartosz%20Osiej&c=books" class="gp-badge r d5" target="_blank"><span class="en">Google Play Books &middot; in review</span><span class="pl">Google Play Books &middot; w weryfikacji</span></a>
         </div>
     </div>
 </section>
