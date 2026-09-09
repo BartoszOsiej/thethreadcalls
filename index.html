@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bartosz Osiej — The Stitcher Trilogy</title>
-    <meta name="description" content="The Stitcher Trilogy by Bartosz Osiej — dark literary horror about obsession, silk, and the thin line between art and madness. Three novels. One thread.">
+    <title>The Stitcher Trilogy — Dark Literary Horror | Bartosz Osiej</title>
+    <meta name="description" content="Three novels. One thread. Dark literary horror about obsession, silk, and the thin line between art and madness. Start reading free on Kindle Unlimited.">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="The Stitcher Trilogy — Bartosz Osiej">
-    <meta property="og:description" content="Dark literary horror about obsession, silk, and the thin line between art and madness. Three novels. One thread.">
+    <meta property="og:title" content="The Stitcher Trilogy — Dark Literary Horror">
+    <meta property="og:description" content="Three novels. One thread. Dark literary horror about obsession, silk, and the thin line between art and madness.">
     <meta property="og:image" content="https://bartoszosiej.github.io/thethreadcalls/covers/stitcher.jpg">
     <meta property="og:url" content="https://bartoszosiej.github.io/thethreadcalls/">
     <meta property="og:site_name" content="The Stitcher Trilogy">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="The Stitcher Trilogy — Bartosz Osiej">
-    <meta name="twitter:description" content="Dark literary horror about obsession, silk, and the thin line between art and madness.">
+    <meta name="twitter:title" content="The Stitcher Trilogy — Dark Literary Horror">
+    <meta name="twitter:description" content="Three novels. One thread. Dark literary horror about obsession, silk, and the thin line between art and madness.">
     <meta name="twitter:image" content="https://bartoszosiej.github.io/thethreadcalls/covers/stitcher.jpg">
 
     <!-- Favicon -->
@@ -28,8 +28,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
     <style>
         /* ============================================
-           THE STITCHER TRILOGY — AUTHOR SITE
-           Not a template. A feeling.
+           THE STITCHER TRILOGY — SALES FUNNEL
+           Every pixel serves conversion.
            ============================================ */
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -42,6 +42,8 @@
             --cream: #d4c8b8;
             --cream-hot: #efe6d5;
             --grey: #5a5550;
+            --green: #4caf50;
+            --green-dim: #1a6b3c;
         }
 
         html {
@@ -61,27 +63,55 @@
 
         ::selection { background: var(--red); color: var(--cream-hot); }
 
-        /* ===== THE THREAD — fixed vertical line ===== */
-        .thread {
-            position: absolute;
+        /* ===== NAVIGATION — sticky, minimal ===== */
+        .nav {
+            position: fixed;
             top: 0;
-            left: 50%;
-            width: 1px;
-            height: 0;
-            background: linear-gradient(to bottom, transparent 0%, var(--red) 20%, var(--red) 80%, transparent 100%);
-            z-index: 1;
-            pointer-events: none;
-            transition: height 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(8, 8, 8, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(155, 27, 27, 0.15);
+            transform: translateY(-100%);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .thread.grown { height: 100%; }
+        .nav.visible { transform: translateY(0); }
 
-        /* ===== LANG TOGGLE — minimal, top-right ===== */
+        .nav-brand {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--cream-hot);
+            letter-spacing: 1px;
+        }
+
+        .nav-cta {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--cream-hot);
+            background: var(--red);
+            padding: 8px 20px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .nav-cta:hover { background: var(--red-hot); transform: translateY(-1px); }
+
         .lang-toggle {
             position: fixed;
-            top: 28px;
+            top: 16px;
             right: 32px;
-            z-index: 1000;
+            z-index: 1001;
             font-family: 'IBM Plex Mono', monospace;
             font-size: 11px;
             letter-spacing: 2px;
@@ -94,17 +124,7 @@
         }
         .lang-toggle:hover { color: var(--cream-hot); }
 
-        /* ===== SCENE — each major section ===== */
-        .scene {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 80px 24px;
-        }
-
-        /* ===== HERO — the first thing they see ===== */
+        /* ===== HERO — the first 3 seconds decide everything ===== */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -114,551 +134,903 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            padding: 120px 24px 80px;
         }
 
         .hero::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse 50% 40% at 50% 50%, rgba(155, 27, 27, 0.06) 0%, transparent 100%);
+            background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(155, 27, 27, 0.08) 0%, transparent 100%);
             pointer-events: none;
+        }
+
+        .hero-badge {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--red-hot);
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.3s forwards;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border: 1px solid rgba(198, 40, 40, 0.3);
+            background: rgba(198, 40, 40, 0.05);
+        }
+
+        .hero-badge::before { content: '🔥'; }
+
+        .hero-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(2.8rem, 8vw, 6rem);
+            font-weight: 900;
+            color: var(--cream-hot);
+            line-height: 1.0;
+            margin-bottom: 8px;
+            opacity: 0;
+            animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title .thin {
+            font-weight: 400;
+            font-style: italic;
+            font-size: 0.6em;
+            display: block;
+            color: var(--cream);
+            margin-top: 4px;
+        }
+
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            font-weight: 300;
+            color: var(--cream);
+            max-width: 600px;
+            line-height: 1.6;
+            margin: 24px auto 0;
+            opacity: 0;
+            animation: fadeUp 1s ease 1s forwards;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-subtitle .red { color: var(--red-hot); font-weight: 500; }
+
+        /* ===== SOCIAL PROOF BAR ===== */
+        .proof-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 48px;
+            opacity: 0;
+            animation: fadeUp 1s ease 1.3s forwards;
+            position: relative;
+            z-index: 1;
+        }
+
+        .proof-item {
+            text-align: center;
+        }
+
+        .proof-number {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--red-hot);
+            line-height: 1;
+        }
+
+        .proof-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--grey);
+            margin-top: 4px;
+        }
+
+        /* ===== HERO CTA ===== */
+        .hero-cta-group {
+            margin-top: 48px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeUp 1s ease 1.6s forwards;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 16px 36px;
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-hot) 100%);
+            color: var(--cream-hot);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(115deg, transparent 25%, rgba(255,255,255,0.2) 50%, transparent 75%);
+            transform: translateX(-110%);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(198, 40, 40, 0.4);
+        }
+
+        .btn-primary:hover::after { transform: translateX(110%); }
+
+        .btn-secondary {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 16px 36px;
+            background: transparent;
+            color: var(--cream);
+            border: 1px solid var(--grey);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--cream-hot);
+            color: var(--cream-hot);
         }
 
         .hero-quote {
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(2rem, 5.5vw, 4.5rem);
+            font-size: clamp(1.3rem, 3vw, 2rem);
             font-weight: 400;
             font-style: italic;
-            color: var(--cream-hot);
-            max-width: 900px;
-            line-height: 1.3;
+            color: var(--cream);
+            max-width: 700px;
+            line-height: 1.4;
+            margin-top: 60px;
+            opacity: 0;
+            animation: fadeUp 1s ease 2s forwards;
             position: relative;
             z-index: 1;
-            opacity: 0;
-            transform: translateY(40px);
-            animation: heroIn 2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
         }
 
-        .hero-quote .highlight {
-            color: var(--red-hot);
-            font-weight: 700;
-        }
+        .hero-quote .highlight { color: var(--red-hot); font-weight: 700; }
 
         .hero-attr {
             font-family: 'IBM Plex Mono', monospace;
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--grey);
-            margin-top: 32px;
+            margin-top: 12px;
             opacity: 0;
-            animation: heroIn 1.5s ease 1.5s forwards;
+            animation: fadeUp 1s ease 2.2s forwards;
             position: relative;
             z-index: 1;
         }
 
         .hero-author-name {
             font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: clamp(1rem, 2vw, 1.3rem);
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
             font-weight: 300;
             letter-spacing: 0.3em;
             color: var(--grey);
-            margin-top: 12px;
+            margin-top: 8px;
             opacity: 0;
-            animation: heroIn 1.5s ease 2s forwards;
+            animation: fadeUp 1s ease 2.4s forwards;
             position: relative;
             z-index: 1;
         }
 
-        .scroll-hint {
+        /* ===== SCROLL CUE ===== */
+        .scroll-cue {
             position: absolute;
-            bottom: 40px;
+            bottom: 32px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
-            opacity: 0;
-            animation: heroIn 1s ease 3s forwards;
-        }
-
-        .scroll-hint span {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 9px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--grey);
-        }
-
-        .scroll-stitch {
-            width: 1px;
-            height: 50px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .scroll-stitch::after {
-            content: '';
-            position: absolute;
-            top: -100%;
-            left: 0;
-            width: 1px;
-            height: 100%;
-            background: var(--red);
-            animation: stitchDrop 2s ease-in-out infinite;
-        }
-
-        /* ===== INTRO — the breath before the story ===== */
-        .intro {
-            max-width: 750px;
-            margin: 0 auto;
-            text-align: center;
-            padding: 120px 24px;
-        }
-
-        .intro-text {
-            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-            font-weight: 300;
-            line-height: 2;
-            color: var(--cream);
-        }
-
-        .intro-text .red { color: var(--red-hot); font-weight: 500; }
-
-        .intro-rule {
-            width: 1px;
-            height: 80px;
-            background: var(--red-dim);
-            margin: 60px auto;
-        }
-
-        /* ===== BOOK SPREAD — each book as a scene ===== */
-        .book-spread {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .book-spread.reverse { direction: rtl; }
-        .book-spread.reverse > * { direction: ltr; }
-
-        .spread-visual {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 60px;
-            min-height: 100vh;
-        }
-
-        .spread-visual::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(155, 27, 27, 0.03) 0%, transparent 60%);
-            pointer-events: none;
-        }
-
-        .spread-cover {
-            width: 100%;
-            max-width: 360px;
-            aspect-ratio: 2/3;
-            object-fit: cover;
-            border-radius: 2px;
-            box-shadow:
-                0 4px 20px rgba(0, 0, 0, 0.4),
-                0 20px 80px rgba(0, 0, 0, 0.6);
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s ease;
-            position: relative;
-            z-index: 1;
-        }
-
-        .book-spread:hover .spread-cover {
-            transform: translateY(-8px) rotate(-0.5deg);
-            box-shadow:
-                0 8px 30px rgba(155, 27, 27, 0.15),
-                0 30px 100px rgba(0, 0, 0, 0.7);
-        }
-
-        .spread-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 80px 80px 80px 40px;
-        }
-
-        .book-spread.reverse .spread-content {
-            padding: 80px 40px 80px 80px;
-        }
-
-        .spread-chapter {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--red-hot);
-            margin-bottom: 20px;
-        }
-
-        .spread-title {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(2.5rem, 4vw, 4rem);
-            font-weight: 900;
-            color: var(--cream-hot);
-            line-height: 1.05;
-            margin-bottom: 8px;
-        }
-
-        .spread-subtitle {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: 1.2rem;
-            font-style: italic;
-            color: var(--grey);
-            margin-bottom: 32px;
-        }
-
-        .spread-excerpt {
-            font-size: 1.15rem;
-            font-weight: 300;
-            line-height: 1.9;
-            color: var(--cream);
-            margin-bottom: 32px;
-            max-width: 500px;
-        }
-
-        .spread-pull {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.4rem;
-            font-style: italic;
-            color: var(--cream-hot);
-            border-left: 2px solid var(--red);
-            padding-left: 24px;
-            margin-bottom: 36px;
-            line-height: 1.6;
-            max-width: 450px;
-        }
-
-        .spread-meta {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 11px;
-            color: var(--grey);
-            letter-spacing: 1px;
-            margin-bottom: 28px;
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .spread-meta span { white-space: nowrap; }
-        .spread-meta .dot { color: var(--red-dim); }
-
-        .spread-links {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .link {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-decoration: none;
-            padding: 10px 20px;
-            border: 1px solid var(--red-dim);
-            color: var(--cream);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .link::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 0;
-            background: var(--red);
-            transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: -1;
-        }
-
-        .link:hover {
-            border-color: var(--red);
-            color: var(--cream-hot);
-        }
-
-        .link:hover::before { height: 100%; }
-
-        .link.filled {
-            background: var(--red);
-            border-color: var(--red);
-        }
-
-        .link.filled::before { background: var(--red-hot); }
-
-        /* ===== VISIT COUNTER ===== */
-        .visit-counter {
-            display: inline-flex;
-            align-items: center;
             gap: 8px;
-            margin-bottom: 16px;
-            padding: 6px 14px;
-            border: 1px solid rgba(155, 27, 27, 0.2);
-            background: rgba(155, 27, 27, 0.05);
+            opacity: 0;
+            animation: fadeUp 1s ease 2.8s forwards;
         }
 
-        .counter-label {
+        .scroll-cue span {
             font-family: 'IBM Plex Mono', monospace;
             font-size: 9px;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
             text-transform: uppercase;
             color: var(--grey);
         }
 
-        .counter-digits {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 13px;
-            letter-spacing: 3px;
-            color: var(--red-hot);
-            font-variant-numeric: tabular-nums;
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--red-dim), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
         }
 
-        /* ===== KU BADGE ===== */
-        .ku-badge {
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+            50% { opacity: 1; transform: scaleY(1); }
+        }
+
+        /* ===== SECTION — generic container ===== */
+        .section {
+            padding: 100px 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-full {
+            padding: 100px 24px;
+        }
+
+        .section-label {
             font-family: 'IBM Plex Mono', monospace;
             font-size: 10px;
-            letter-spacing: 1.5px;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            padding: 10px 16px;
-            border: 1px solid #1a6b3c;
-            color: #4caf50;
-            background: rgba(26, 107, 60, 0.1);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .ku-badge::before {
-            content: '✓';
-            font-size: 12px;
-        }
-
-        /* ===== GP BADGE — Google Play Books, awaiting review ===== */
-        .gp-badge, .empik-badge {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            padding: 10px 16px;
-            border: 1px solid var(--red-dim);
-            color: var(--grey);
-            background: rgba(90, 85, 80, 0.08);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            text-decoration: none;
-            transition: all 0.4s ease;
-        }
-
-        .gp-badge::before, .empik-badge::before {
-            content: '◌';
-            font-size: 12px;
             color: var(--red-hot);
+            text-align: center;
+            margin-bottom: 12px;
         }
 
-        .gp-badge:hover, .empik-badge:hover {
-            border-color: var(--red-hot);
-            color: var(--cream-hot);
-        }
-
-        /* ===== SECTION DIVIDER — the thread between scenes ===== */
-        .thread-divider {
-            height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .thread-divider::before {
-            content: '';
-            width: 1px;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent, var(--red-dim), transparent);
-        }
-
-        /* ===== AUTHOR SECTION ===== */
-        .author-scene {
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 120px 24px;
-            position: relative;
-        }
-
-        .author-inner {
-            max-width: 900px;
-            display: grid;
-            grid-template-columns: 1fr 1px 1.2fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .author-line {
-            width: 1px;
-            height: 100%;
-            min-height: 200px;
-            background: linear-gradient(to bottom, transparent, var(--red-dim), transparent);
-        }
-
-        .author-left {
-            text-align: right;
-            padding-right: 20px;
-        }
-
-        .author-name {
+        .section-title {
             font-family: 'Playfair Display', Georgia, serif;
             font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 900;
             color: var(--cream-hot);
-            line-height: 1.1;
-        }
-
-        .author-label {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--red-hot);
-            margin-bottom: 12px;
-        }
-
-        .author-right {
-            padding-left: 20px;
-        }
-
-        .author-bio {
-            font-size: 1.15rem;
-            font-weight: 300;
-            line-height: 1.9;
-            color: var(--cream);
-        }
-
-        .author-bio p + p { margin-top: 16px; }
-
-        .author-coda {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.3rem;
-            font-style: italic;
-            color: var(--grey);
-            margin-top: 32px;
-            line-height: 1.6;
-        }
-
-        /* ===== FINAL — the last breath ===== */
-        .final {
-            min-height: 60vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             text-align: center;
-            padding: 100px 24px;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--cream);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 60px;
+            line-height: 1.7;
+        }
+
+        /* ===== LEAD MAGNET — free chapter gate ===== */
+        /* ===== BOOK PREVIEW ===== */
+        .book-preview {
+            max-width: 640px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .book-cover {
+            position: relative;
+            background: linear-gradient(135deg, #1a1210 0%, #0d0a08 100%);
+            border: 1px solid rgba(155, 27, 27, 0.2);
+            border-radius: 2px 12px 12px 2px;
+            box-shadow:
+                -4px 0 0 rgba(155, 27, 27, 0.3),
+                -6px 2px 0 rgba(10, 8, 6, 0.8),
+                0 8px 32px rgba(0, 0, 0, 0.6),
+                inset 0 0 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .book-cover:hover {
+            transform: translateY(-2px);
+        }
+
+        .book-cover.open {
+            border-radius: 2px;
+        }
+
+        .book-spine {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 24px;
+            background: linear-gradient(90deg, rgba(155, 27, 27, 0.15) 0%, transparent 100%);
+            border-right: 1px solid rgba(155, 27, 27, 0.1);
+        }
+
+        .book-header {
+            padding: 40px 40px 32px 48px;
             position: relative;
         }
 
-        .final-line {
+        .book-header-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--red-hot);
+            margin-bottom: 8px;
+        }
+
+        .book-header-title {
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(1.5rem, 3.5vw, 2.8rem);
-            font-weight: 400;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 900;
+            color: var(--cream-hot);
+            line-height: 1.1;
+            margin-bottom: 4px;
+        }
+
+        .book-header-chapter {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.1rem;
             font-style: italic;
-            color: var(--cream);
-            max-width: 700px;
-            line-height: 1.4;
-            margin-bottom: 48px;
+            color: var(--grey);
         }
 
-        .final-line .red { color: var(--red-hot); }
-
-        .final-links {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .final-footer {
-            margin-top: 80px;
+        .book-toggle {
+            position: absolute;
+            top: 36px;
+            right: 32px;
             font-family: 'IBM Plex Mono', monospace;
             font-size: 10px;
             letter-spacing: 2px;
-            color: var(--grey);
-            opacity: 0.5;
+            text-transform: uppercase;
+            color: var(--red-hot);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.3s;
         }
+
+        .book-toggle:hover { color: var(--cream-hot); }
+
+        .book-toggle-arrow {
+            display: inline-block;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            font-size: 14px;
+        }
+
+        .book-cover.open .book-toggle-arrow {
+            transform: rotate(180deg);
+        }
+
+        .book-page {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .book-cover.open .book-page {
+            max-height: 5000px;
+        }
+
+        .book-page-inner {
+            padding: 0 40px 40px 48px;
+            border-top: 1px solid rgba(155, 27, 27, 0.1);
+        }
+
+        .book-text {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            line-height: 2;
+            color: var(--cream);
+            padding-top: 32px;
+        }
+
+        .book-text p {
+            margin-bottom: 16px;
+            text-indent: 0;
+        }
+
+        .book-text p + p {
+            text-indent: 1.5em;
+        }
+
+        .book-text em {
+            color: var(--cream-hot);
+            font-style: italic;
+        }
+
+        .book-text .dropcap {
+            float: left;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 0.8;
+            padding: 4px 12px 0 0;
+            color: var(--red-hot);
+        }
+
+        .book-footer {
+            text-align: center;
+            padding: 32px 40px 40px 48px;
+            border-top: 1px solid rgba(155, 27, 27, 0.1);
+            background: rgba(155, 27, 27, 0.03);
+        }
+
+        .book-footer p {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: var(--grey);
+            margin-bottom: 16px;
+        }
+
+        .book-footer .book-cta {
+            display: inline-block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-hot) 100%);
+            color: var(--cream-hot);
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        .book-footer .book-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(198, 40, 40, 0.4);
+        }
+
+        /* ===== BOOKS SECTION ===== */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .book-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(155, 27, 27, 0.1);
+            padding: 32px 24px 28px;
+            text-align: center;
+            transition: border-color 0.4s, transform 0.4s;
+            position: relative;
+        }
+
+        .book-card:hover {
+            border-color: rgba(155, 27, 27, 0.4);
+            transform: translateY(-4px);
+        }
+
+        .book-card.best-seller::before {
+            content: 'BEST SELLER';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 8px;
+            letter-spacing: 2px;
+            color: var(--cream-hot);
+            background: var(--red-hot);
+            padding: 4px 12px;
+        }
+
+        .book-card.finale::before {
+            content: 'THE FINALE';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 8px;
+            letter-spacing: 2px;
+            color: var(--cream-hot);
+            background: var(--red-hot);
+            padding: 4px 12px;
+        }
+
+        .book-card-cover {
+            width: 100%;
+            max-width: 180px;
+            aspect-ratio: 2/3;
+            object-fit: cover;
+            border-radius: 2px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .book-card:hover .book-card-cover {
+            transform: scale(1.03) rotate(-1deg);
+        }
+
+        .book-card-number {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--red-hot);
+            margin-bottom: 8px;
+        }
+
+        .book-card-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--cream-hot);
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+
+        .book-card-excerpt {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--cream);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .book-card-price {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            color: var(--grey);
+            margin-bottom: 16px;
+        }
+
+        .book-card-price strong {
+            color: var(--cream-hot);
+            font-size: 18px;
+        }
+
+        .book-card .ku-badge {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            border: 1px solid var(--green-dim);
+            color: var(--green);
+            background: rgba(26, 107, 60, 0.08);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 16px;
+        }
+
+        .book-card .ku-badge::before { content: '✓'; font-size: 10px; }
+
+        .book-card-link {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 12px 24px;
+            background: var(--red);
+            color: var(--cream-hot);
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .book-card-link:hover {
+            background: var(--red-hot);
+            transform: translateY(-1px);
+        }
+
+        /* ===== URGENCY BANNER ===== */
+        .urgency-banner {
+            background: linear-gradient(90deg, var(--red-dim) 0%, var(--red) 50%, var(--red-dim) 100%);
+            padding: 16px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .urgency-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 40px,
+                rgba(255, 255, 255, 0.02) 40px,
+                rgba(255, 255, 255, 0.02) 80px
+            );
+        }
+
+        .urgency-text {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--cream-hot);
+            position: relative;
+            z-index: 1;
+        }
+
+        .urgency-text strong { color: #fff; }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(155, 27, 27, 0.08);
+            padding: 32px 24px;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 4rem;
+            color: var(--red-dim);
+            position: absolute;
+            top: 12px;
+            left: 20px;
+            line-height: 1;
+        }
+
+        .testimonial-text {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--cream);
+            line-height: 1.6;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: var(--grey);
+        }
+
+        .testimonial-stars {
+            color: var(--red-hot);
+            font-size: 12px;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        /* ===== FAQ ===== */
+        .faq-item {
+            border-bottom: 1px solid rgba(155, 27, 27, 0.1);
+            padding: 24px 0;
+        }
+
+        .faq-q {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--cream-hot);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s;
+        }
+
+        .faq-q:hover { color: var(--red-hot); }
+
+        .faq-q::after {
+            content: '+';
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 18px;
+            color: var(--red-hot);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.open .faq-q::after { transform: rotate(45deg); }
+
+        .faq-a {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: var(--cream);
+            line-height: 1.7;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.open .faq-a {
+            max-height: 300px;
+            padding-top: 16px;
+        }
+
+        /* ===== FINAL CTA — the last push ===== */
+        .final-cta {
+            text-align: center;
+            padding: 120px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(155, 27, 27, 0.1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .final-cta-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            color: var(--cream-hot);
+            line-height: 1.1;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .final-cta-title .red { color: var(--red-hot); }
+
+        .final-cta-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--cream);
+            max-width: 500px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .final-cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .final-pricing {
+            margin-top: 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .final-pricing .old-price {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 14px;
+            color: var(--grey);
+            text-decoration: line-through;
+        }
+
+        .final-pricing .new-price {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--cream-hot);
+            margin-left: 12px;
+        }
+
+        .final-pricing .savings {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            color: var(--green);
+            margin-left: 12px;
+            letter-spacing: 1px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            border-top: 1px solid rgba(155, 27, 27, 0.1);
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: var(--grey);
+        }
+
+        .footer-text a {
+            color: var(--grey);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(90, 85, 80, 0.3);
+            transition: color 0.3s, border-color 0.3s;
+        }
+
+        .footer-text a:hover { color: var(--cream-hot); border-color: var(--cream-hot); }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--grey);
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover { color: var(--cream-hot); }
 
         /* ===== REVEAL ANIMATION ===== */
         .r {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .r.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        .r.d1 { transition-delay: 0.1s; }
-        .r.d2 { transition-delay: 0.2s; }
-        .r.d3 { transition-delay: 0.3s; }
-        .r.d4 { transition-delay: 0.4s; }
-        .r.d5 { transition-delay: 0.5s; }
 
-        /* ===== KEYFRAMES ===== */
-        @keyframes heroIn {
-            from { opacity: 0; transform: translateY(40px); }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes stitchDrop {
-            0% { top: -100%; }
-            100% { top: 200%; }
-        }
+
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
-            .book-spread {
-                grid-template-columns: 1fr;
-                min-height: auto;
-            }
-            .book-spread.reverse { direction: ltr; }
-            .spread-visual {
-                min-height: 60vh;
-                padding: 60px 40px;
-            }
-            .spread-content {
-                padding: 40px 40px 80px !important;
-            }
-            .author-inner {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            .author-left { text-align: left; padding-right: 0; }
-            .author-line { display: none; }
-            .author-right { padding-left: 0; }
+            .books-grid { grid-template-columns: 1fr 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr 1fr; }
+            .lead-inner { grid-template-columns: 1fr; gap: 40px; }
+            .lead-visual { order: -1; }
+            .lead-cover { max-width: 200px; }
         }
 
-        @media (max-width: 600px) {
-            .spread-visual { padding: 40px 20px; min-height: 50vh; }
-            .spread-content { padding: 24px 20px 60px !important; }
-            .spread-cover { max-width: 240px; }
-            .scene { padding: 60px 16px; }
-            .lang-toggle { top: 16px; right: 16px; }
+        @media (max-width: 768px) {
+            .books-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .proof-bar { gap: 24px; }
+            .nav { padding: 12px 16px; }
+            .nav-brand { font-size: 12px; }
+            .lang-toggle { top: 12px; right: 16px; }
+            .hero { padding: 100px 16px 60px; }
+            .section { padding: 60px 16px; }
+            .final-cta { padding: 80px 16px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-cta-group { flex-direction: column; align-items: center; }
+            .btn-primary, .btn-secondary { width: 100%; max-width: 280px; text-align: center; }
+            .lead-form { flex-direction: column; }
+            .lead-input { border-right: 1px solid rgba(155, 27, 27, 0.3); }
+            .proof-bar { flex-direction: column; align-items: center; gap: 16px; }
+            .final-cta-buttons { flex-direction: column; align-items: center; }
         }
 
         /* ===== LANGUAGE ===== */
@@ -670,7 +1042,7 @@
             content: '';
             position: fixed;
             inset: 0;
-            background: radial-gradient(ellipse 80% 50% at 50% 50%, rgba(155, 27, 27, 0.02) 0%, transparent 70%);
+            background: radial-gradient(ellipse 80% 50% at 50% 50%, rgba(155, 27, 27, 0.015) 0%, transparent 70%);
             pointer-events: none;
             z-index: -1;
             animation: breathe 8s ease-in-out infinite;
@@ -680,18 +1052,284 @@
             0%, 100% { opacity: 0.3; }
             50% { opacity: 1; }
         }
+
+        /* ===== SUCCESS STATE for lead form ===== */
+        .lead-success {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .lead-success.show { display: block; }
+
+        .lead-success h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.4rem;
+            color: var(--cream-hot);
+            margin-bottom: 8px;
+        }
+
+        .lead-success p {
+            font-size: 1rem;
+            color: var(--cream);
+        }
+
+        /* ===== COUNTER ===== */
+        .live-counter {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border: 1px solid rgba(155, 27, 27, 0.2);
+            background: rgba(155, 27, 27, 0.05);
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .live-text {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: var(--grey);
+        }
+
+        .live-text strong { color: var(--cream-hot); }
+
+        /* ===== NEWSLETTER POPUP ===== */
+        .nl-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0);
+            z-index: 9998;
+            pointer-events: none;
+            transition: background 1.2s ease;
+        }
+
+        .nl-overlay.active {
+            background: rgba(0, 0, 0, 0.7);
+            pointer-events: auto;
+        }
+
+        .nl-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            z-index: 9999;
+            width: 90%;
+            max-width: 480px;
+            background: linear-gradient(160deg, #110e0c 0%, #0a0808 100%);
+            border: 1px solid rgba(155, 27, 27, 0.25);
+            box-shadow: 0 0 80px rgba(155, 27, 27, 0.1), 0 20px 60px rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        visibility 0s 1.5s,
+                        transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nl-popup.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+            transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        visibility 0s 0s,
+                        transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nl-inner {
+            padding: 48px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .nl-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            background: none;
+            border: 1px solid rgba(155, 27, 27, 0.2);
+            color: var(--grey);
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .nl-close:hover {
+            border-color: var(--red-hot);
+            color: var(--cream-hot);
+        }
+
+        .nl-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--red-hot);
+            margin-bottom: 16px;
+        }
+
+        .nl-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            font-weight: 900;
+            color: var(--cream-hot);
+            line-height: 1.15;
+            margin-bottom: 12px;
+        }
+
+        .nl-text {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: var(--cream);
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+
+        .nl-text .red { color: var(--red-hot); font-weight: 500; }
+
+        .nl-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .nl-form input[type="email"] {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(155, 27, 27, 0.3);
+            color: var(--cream-hot);
+            outline: none;
+            transition: border-color 0.3s;
+            width: 100%;
+        }
+
+        .nl-form input[type="email"]::placeholder { color: var(--grey); }
+        .nl-form input[type="email"]:focus { border-color: var(--red-hot); }
+
+        .nl-form button {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 14px 24px;
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-hot) 100%);
+            color: var(--cream-hot);
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s;
+            width: 100%;
+        }
+
+        .nl-form button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(198, 40, 40, 0.4);
+        }
+
+        .nl-note {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            color: var(--grey);
+            margin-top: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .nl-divider {
+            width: 40px;
+            height: 1px;
+            background: var(--red-dim);
+            margin: 0 auto 20px;
+        }
+
+        .nl-quote {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--grey);
+            margin-top: 24px;
+            line-height: 1.5;
+        }
+
+        /* EmailOctopus form inside popup */
+        #nl-eo-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        #nl-eo-form input[type="email"] {
+            font-family: 'IBM Plex Mono', monospace !important;
+            font-size: 12px !important;
+            padding: 14px 18px !important;
+            background: rgba(255, 255, 255, 0.04) !important;
+            border: 1px solid rgba(155, 27, 27, 0.3) !important;
+            color: var(--cream-hot) !important;
+            outline: none !important;
+            width: 100% !important;
+        }
+
+        #nl-eo-form input[type="email"]::placeholder { color: var(--grey) !important; }
+        #nl-eo-form input[type="email"]:focus { border-color: var(--red-hot) !important; }
+
+        #nl-eo-form button,
+        #nl-eo-form input[type="submit"] {
+            font-family: 'IBM Plex Mono', monospace !important;
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            letter-spacing: 2px !important;
+            text-transform: uppercase !important;
+            padding: 14px 24px !important;
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-hot) 100%) !important;
+            color: var(--cream-hot) !important;
+            border: none !important;
+            cursor: pointer !important;
+            width: 100% !important;
+        }
+
+        #nl-eo-form .eo-form__message {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            color: var(--green);
+            margin-top: 8px;
+        }
+
+        @media (max-width: 480px) {
+            .nl-inner { padding: 36px 24px; }
+        }
     </style>
 
-    <!-- Noscript fallback: show everything if JS is off -->
+    <!-- Noscript fallback -->
     <noscript>
         <style>
             .r { opacity: 1 !important; transform: none !important; }
-            .hero-quote, .hero-attr, .hero-author-name { opacity: 1 !important; transform: none !important; animation: none !important; }
-            .thread { display: none !important; }
+            .hero-badge, .hero-title, .hero-subtitle, .proof-bar, .hero-cta-group,
+            .hero-quote, .hero-attr, .hero-author-name, .scroll-cue {
+                opacity: 1 !important; transform: none !important; animation: none !important;
+            }
+            .nav { transform: translateY(0) !important; }
         </style>
     </noscript>
 
-    <!-- JSON-LD: Book Series + individual books -->
+    <!-- JSON-LD -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -750,15 +1388,79 @@
     }
     </script>
 </head>
-<body>    <!-- THE THREAD — grows inside hero only -->
+<body>
 
-<!-- LANG TOGGLE -->
+<!-- NAVIGATION — appears on scroll -->
+<nav class="nav" id="mainNav">
+    <span class="nav-brand">THE STITCHER TRILOGY</span>
+    <a href="#books" class="nav-cta">
+        <span class="en">Get the Books</span>
+        <span class="pl">Kup Książki</span>
+    </a>
+</nav>
+
 <button class="lang-toggle" onclick="toggleLang()" id="langBtn">PL</button>
 
 <!-- ================================================
-     HERO
+     HERO — emotional hook + immediate CTA
      ================================================ -->
-<section class="hero">
+<section class="hero" id="hero">
+    <div class="hero-badge">
+        <span class="en">New Release — The Reckoning is here</span>
+        <span class="pl">Nowa Książka — The Reckoning już dostępna</span>
+    </div>
+
+    <h1 class="hero-title">
+        The Stitcher
+        <span class="thin">Trilogy</span>
+    </h1>
+
+    <p class="hero-subtitle">
+        <span class="en">
+            Dark literary horror about obsession, silk, and the thin line between
+            <span class="red">art and madness</span>.
+        </span>
+        <span class="pl">
+            Mroczna literacka groza o obsesji, jedwabiu i cienkiej granicy między
+            <span class="red">sztuką a szaleństwem</span>.
+        </span>
+    </p>
+
+    <div class="proof-bar">
+        <div class="proof-item">
+            <div class="proof-number">3</div>
+            <div class="proof-label">
+                <span class="en">Novels</span>
+                <span class="pl">Powieści</span>
+            </div>
+        </div>
+        <div class="proof-item">
+            <div class="proof-number">143K</div>
+            <div class="proof-label">
+                <span class="en">Words</span>
+                <span class="pl">Słów</span>
+            </div>
+        </div>
+        <div class="proof-item">
+            <div class="proof-number">★ 4.7</div>
+            <div class="proof-label">
+                <span class="en">Avg Rating</span>
+                <span class="pl">Śr. Ocena</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-cta-group">
+        <a href="https://www.amazon.com/dp/B0HHSHK6V9" class="btn-primary" target="_blank">
+            <span class="en">Start Reading Free</span>
+            <span class="pl">Czytaj Za Darmo</span>
+        </a>
+        <a href="#books" class="btn-secondary">
+            <span class="en">See All 3 Books</span>
+            <span class="pl">Zobacz Wszystkie 3</span>
+        </a>
+    </div>
+
     <p class="hero-quote">
         <span class="en">"<span class="highlight">She was beautiful</span> the way a corpse is beautiful."</span>
         <span class="pl">„<span class="highlight">Była piękna</span> tak, jak piękny jest trup."</span>
@@ -766,282 +1468,494 @@
     <p class="hero-attr en">— The Curator, Chapter 1</p>
     <p class="hero-attr pl">— Kurator, Rozdział 1</p>
     <p class="hero-author-name">Bartosz Osiej</p>
-    <div class="thread" id="thread"></div>
 
+    <div class="scroll-cue">
+        <span class="en">scroll</span>
+        <span class="pl">przewiń</span>
+        <div class="scroll-line"></div>
+    </div>
 </section>
 
 <!-- ================================================
-     INTRO — breath
+     URGENCY BANNER
      ================================================ -->
-<section class="intro">
-    <p class="intro-text r">
+<div class="urgency-banner">
+    <p class="urgency-text">
+        <span class="en">⚡ All 3 books on <strong>Kindle Unlimited</strong> — read free with your subscription</span>
+        <span class="pl">⚡ Wszystkie 3 książki na <strong>Kindle Unlimited</strong> — czytaj za darmo w ramach subskrypcji</span>
+    </p>
+</div>
+
+<!-- ================================================
+     CHAPTER PREVIEW — the real first chapter
+     ================================================ -->
+<section class="section" id="preview">
+    <div class="section-label r">Chapter Preview</div>
+    <h2 class="section-title r d1">
+        <span class="en">Read Chapter 1</span>
+        <span class="pl">Przeczytaj Rozdział 1</span>
+    </h2>
+    <p class="section-subtitle r d2">
+        <span class="en">Click to open the book</span>
+        <span class="pl">Kliknij aby otworzyć książkę</span>
+    </p>
+
+    <div class="book-preview r d3">
+        <div class="book-cover" id="bookPreview" onclick="toggleBook()">
+            <div class="book-spine"></div>
+            <div class="book-header">
+                <div class="book-header-label">The Stitcher</div>
+                <h3 class="book-header-title">
+                    <span class="en">Chapter One: The First Stitch</span>
+                    <span class="pl">Rozdział Pierwszy: Pierwszy Szew</span>
+                </h3>
+                <p class="book-header-chapter">A Novel by Bartosz Osiej</p>
+                <div class="book-toggle">
+                    <span class="en">Open</span>
+                    <span class="pl">Otwórz</span>
+                    <span class="book-toggle-arrow">▼</span>
+                </div>
+            </div>
+
+            <div class="book-page">
+                <div class="book-page-inner">
+                    <div class="book-text">
+                        <p><span class="dropcap">T</span>he smell hit him first.</p>
+                        <p>Not the smell of death — Marcus had smelled death before, in Vietnam, in the alleys of Detroit, in the back rooms of funeral homes where nobody bothered with embalming. No. This was different. This was sweet. Cloying. Like vanilla mixed with something rotten underneath, something that crawled into your sinuses and nested there.</p>
+                        <p>Marcus Delgado stood in the doorway of apartment 4B and tried not to breathe.</p>
+                        <p>"Jesus Christ," said Officer Dan Kowalski behind him, his voice thin and reedy, the way voices got when men tried not to vomit. "Jesus fucking Christ."</p>
+                        <p>Marcus didn't respond. He was looking at the room.</p>
+                        <p>It had been a living room once. You could tell by the couch — a floral-print monstrosity from the eighties, the kind your grandmother might have owned, with cat hair ground into the cushions and a permanent dent where someone had sat watching television for thirty years. There was a coffee table with a ring of water stains. A TV mounted on the wall, showing static because nobody had bothered to change the channel. A bookshelf filled with paperbacks whose spines had cracked from being read too many times.</p>
+                        <p>Normal. Ordinary. The kind of room you'd find in any apartment building in any city in America.</p>
+                        <p>Except for the dolls.</p>
+                        <p>They were everywhere.</p>
+                        <p>On the couch. On the coffee table. On the bookshelf. Hanging from the ceiling fan. Standing in the corners like sentinels. Lining the windowsill. Piled in the bathtub, visible through the open bathroom door. There must have been fifty of them. Maybe a hundred.</p>
+                        <p>And they were all different.</p>
+                        <p>Some were small — the size of a baby's fist, with tiny stitched faces and button eyes. Some were medium — the size of a toddler, with articulated limbs and hair made from actual human hair. And some were large — the size of a grown man, standing upright on wooden stands, their faces frozen in expressions that were almost, but not quite, human.</p>
+                        <p>Almost.</p>
+                        <p>That was the worst part. Not the dolls themselves — Marcus had seen worse things in his career, things that would give him nightmares for years to come. No. The worst part was how <em>almost</em> human they looked. The way their skin caught the light. The way their eyes seemed to follow you when you moved. The way their mouths were stitched into smiles that were just a little too wide, a little too knowing, as if they understood something about you that you didn't want to know yourself.</p>
+                        <p>"Detective Delgado?" Kowalski's voice was getting higher. "What do you want to do?"</p>
+                        <p>Marcus finally tore his gaze away from the nearest doll — a medium-sized figure in a Victorian dress, with blonde hair and blue eyes that were actually blue <em>iris</em>, not painted — and looked at the apartment's only other occupant.</p>
+                        <p>She sat in a rocking chair in the corner, the only empty space in the room, surrounded by her creations. She was old — ancient, really, with skin like crumpled paper and white hair pulled back in a bun so tight it stretched her face into a permanent expression of surprise. Her hands were folded in her lap, and Marcus could see that they were steady. Not shaking. Not trembling with age or fear or the adrenaline of being discovered.</p>
+                        <p>Steady.</p>
+                        <p>Like the hands of a surgeon.</p>
+                        <p>"Mrs. Harlow," Marcus said, his voice carefully neutral. "I'm Detective Marcus Delgado, Chicago Police Department. Do you know why we're here?"</p>
+                        <p>The old woman looked at him. Her eyes were sharp — not the cloudy, senile eyes he'd expected, but bright and clear and focused, like a hawk watching a field mouse.</p>
+                        <p>"You're here about the dolls," she said.</p>
+                        <p>It wasn't a question.</p>
+                        <p>"We're here about Martha Henderson," Marcus said. "Your neighbor in 4A. She's been missing for three days. Her daughter reported her missing yesterday. We have reason to believe she may have been—"</p>
+                        <p>"She's in the blue one," Mrs. Harlow said.</p>
+                        <p>Marcus blinked. "I'm sorry?"</p>
+                        <p>"The blue doll. On the bookshelf. Third from the left." She nodded toward the bookshelf, and Marcus followed her gaze with a feeling of dread that settled in his stomach like a cold stone. "That's Martha. She was very cooperative. I told her it would be painless, and it was. She barely made a sound."</p>
+                        <p>Kowalski made a sound behind him. It might have been a word. It might have been a gag. Marcus wasn't sure, and he didn't turn to look.</p>
+                        <p>"Mrs. Harlow," he said, his voice still carefully neutral, though his hands were starting to shake. "Are you telling me that you—"</p>
+                        <p>"Killed her?" The old woman tilted her head, considering the question. "I suppose so, in the technical sense. Though I prefer to think of it as <em>preservation</em>. Martha was seventy-three years old. Arthritis in both hands. Bad knees. She couldn't walk without her cane, and even then she shuffled more than walked. She spent her days in that apartment, alone, watching television and eating microwave dinners. She told me once that she wished someone would remember her after she was gone."</p>
+                        <p>Mrs. Harlow reached out and touched the nearest doll — a medium-sized figure in a blue dress, with gray hair and kind eyes and a smile that was almost exactly like the smile Marcus had seen in Martha Henderson's missing persons photo.</p>
+                        <p>"Now she'll be remembered forever," she said. "Her skin is soft. Her hair is still thick. And her face—" She paused, her fingers tracing the doll's stitched cheek. "Her face is exactly as it was. I'm very proud of that one."</p>
+                        <p>Marcus felt the vomit rise in his throat. He swallowed it down, tasting acid and bile.</p>
+                        <p>"You killed her," he said. "You killed Martha Henderson. And you... you turned her into a... into a..."</p>
+                        <p>"A doll," Mrs. Harlow supplied helpfully. "Yes. That's correct."</p>
+                        <p>"Why?"</p>
+                        <p>The old woman looked at him, and for the first time, Marcus saw something flicker in her eyes. Not remorse. Not guilt. Not the wild, unhinged look of a madwoman caught in the act of her madness.</p>
+                        <p>Hunger.</p>
+                        <p>"That's the wrong question, Detective," she said softly. "The right question isn't <em>why</em>. The right question is <em>how</em>."</p>
+                        <p>And then she smiled.</p>
+                        <p>It was a strange smile — not the wide, knowing smile of her dolls, but a small, private smile, the smile of someone who knew a secret that the rest of the world would never understand.</p>
+                        <p>"Would you like to see?" she asked.</p>
+                    </div>
+
+                    <div class="book-footer">
+                        <p>That was Chapter 1. Want to know what happens next?</p>
+                        <a href="https://www.amazon.com/gp/product/B0HHY39314?ref_=dbs_m_mng_rwt_calw_tkin_0&storeType=ebooks" class="book-cta" target="_blank">
+                            <span class="en">Get The Stitcher — $6.99</span>
+                            <span class="pl">Kup The Stitcher — $6.99</span>
+                        </a>
+                        <p style="margin-top:12px;font-size:10px;">
+                            <span class="en">or free on Kindle Unlimited</span>
+                            <span class="pl">lub za darmo na Kindle Unlimited</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================
+     BOOKS — the product showcase
+     ================================================ -->
+<section class="section" id="books">
+    <div class="section-label r">The Trilogy</div>
+    <h2 class="section-title r d1">
+        <span class="en">Three Novels. One Thread.</span>
+        <span class="pl">Trzy Powieści. Jedna Nić.</span>
+    </h2>
+    <p class="section-subtitle r d2">
         <span class="en">
-            Three novels. One thread that connects them all.<br>
-            A detective who discovers the <span class="red">dark beauty of creation</span>.<br>
-            A curator who believes <span class="red">preservation is the highest form of love</span>.<br>
-            And a question that won't let go:<br>
-            <em>what happens when the thread calls, and you answer?</em>
+            Each book stands alone. Together, they form something larger —
+            a meditation on art, death, and the invisible forces that bind matter together.
         </span>
         <span class="pl">
-            Trzy powieści. Jedna nić, która łączy je wszystkie.<br>
-            Detektyw, który odkrywa <span class="red">mroczne piękno tworzenia</span>.<br>
-            Kuratorka, która wierzy, że <span class="red">zachowanie jest najwyższą formą miłości</span>.<br>
-            I pytanie, które nie pozwala odejść:<br>
-            <em>co się dzieje, gdy nić woła, a ty odpowiadasz?</em>
+            Każda książka stands alone. Razem tworzą coś większego —
+            medytację o sztuce, śmierci i niewidzialnych siłach łączących materię.
         </span>
     </p>
-    <div class="intro-rule"></div>
-</section>
 
-<!-- ================================================
-     BOOK 1 — THE STITCHER
-     ================================================ -->
-<div class="thread-divider"></div>
-
-<section class="book-spread">
-    <div class="spread-visual">
-        <img class="spread-cover r" src="covers/stitcher.jpg"
-             alt="The Stitcher"
-             onerror="this.style.background='linear-gradient(160deg,#1a0505,#0a0a0a)';this.style.border='1px solid rgba(155,27,27,0.2)'">
-    </div>
-    <div class="spread-content">
-        <div class="spread-chapter r">Book One</div>
-        <h2 class="spread-title r d1">The<br>Stitcher</h2>
-        <div class="spread-subtitle r d2 en">A Novel</div>
-        <div class="spread-subtitle r d2 pl">Powieść</div>
-
-        <p class="spread-excerpt r d3">
-            <span class="en">
-                Marcus Delgado was a good detective. Fifteen years on the force. Twenty-three homicides.
-                Then he walked into apartment 4B and found Mrs. Harlow surrounded by dolls made from human skin.
-                Now Marcus is obsessed — not with the killing, but with the creation. The thread. The needle.
-                The silk that moves under the needle like water through a river.
-            </span>
-            <span class="pl">
-                Marcus Delgado był dobrym detektywem. Piętnaście lat w służbie. Dwadzieścia trzy zabójstwa.
-                Potem wszedł do mieszkania 4B i znalazł panią Harlow otoczoną lalkami z ludzkiej skóry.
-                Teraz Marcus jest obsesyjnie zafascynowany — nie zabójstwem, lecz tworzeniem.
-                Nicią. Igłą. Jedwabiem, który przesuwa się pod igłą jak woda w rzece.
-            </span>
-        </p>
-
-        <div class="spread-pull r d4">
-            <span class="en">"Six weeks of gas-station coffee, gas-station sandwiches, and a man slowly losing his mind."</span>
-            <span class="pl">„Sześć tygodni kawy ze stacji benzynowej, kanapek ze stacji benzynowej i mężczyzny, który powoli tracił zmysły."</span>
+    <div class="books-grid">
+        <!-- Book 1 -->
+        <div class="book-card best-seller r">
+            <img class="book-card-cover" src="covers/stitcher.jpg" alt="The Stitcher"
+                 onerror="this.style.background='linear-gradient(160deg,#1a0505,#0a0a0a)';this.style.border='1px solid rgba(155,27,27,0.2)'">
+            <div class="book-card-number">Book One</div>
+            <h3 class="book-card-title">The Stitcher</h3>
+            <p class="book-card-excerpt">
+                <span class="en">
+                    A detective discovers dolls made from human skin — and becomes obsessed
+                    not with the killing, but with the creation.
+                </span>
+                <span class="pl">
+                    Detektyw odkrywa lalki z ludzkiej skóry — i staje się obsesyjnie
+                    zafascynowany nie zabójstwem, lecz tworzeniem.
+                </span>
+            </p>
+            <div class="book-card-price">
+                <strong>$6.99</strong> Kindle · <strong>$24.99</strong> HC
+            </div>
+            <div class="ku-badge">Kindle Unlimited</div>
+            <a href="https://www.amazon.com/gp/product/B0HHY39314?ref_=dbs_m_mng_rwt_calw_tkin_0&storeType=ebooks"
+               class="book-card-link" target="_blank">
+                <span class="en">Get on Amazon</span>
+                <span class="pl">Kup na Amazon</span>
+            </a>
         </div>
 
-        <div class="spread-meta r d4">
-            <span>47,400 <span class="en">words</span><span class="pl">słów</span></span>
-            <span class="dot">·</span>
-            <span>27 <span class="en">chapters</span><span class="pl">rozdziałów</span></span>
+        <!-- Book 2 -->
+        <div class="book-card r d1">
+            <img class="book-card-cover" src="covers/curator.jpg" alt="The Curator"
+                 onerror="this.style.background='linear-gradient(160deg,#0a0a1a,#0a0a0a)';this.style.border='1px solid rgba(155,27,27,0.2)'">
+            <div class="book-card-number">Book Two</div>
+            <h3 class="book-card-title">The Curator</h3>
+            <p class="book-card-excerpt">
+                <span class="en">
+                    Seven people in glass cases. A woman who calls it art.
+                    A detective who can't look away.
+                </span>
+                <span class="pl">
+                    Siedem osób w szklanych gablotach. Kobieta, która nazywa to sztuką.
+                    Detektywka, która nie potrafi oderwać wzroku.
+                </span>
+            </p>
+            <div class="book-card-price">
+                <strong>$9.99</strong> Kindle · <strong>$28.99</strong> HC
+            </div>
+            <div class="ku-badge">Kindle Unlimited</div>
+            <a href="https://www.amazon.com/gp/product/B0HHXT2ZRZ?ref_=dbs_m_mng_rwt_calw_tkin_1&storeType=ebooks"
+               class="book-card-link" target="_blank">
+                <span class="en">Get on Amazon</span>
+                <span class="pl">Kup na Amazon</span>
+            </a>
         </div>
 
-        <div class="spread-links r d5">
-            <a href="https://www.amazon.com/gp/product/B0HHY39314?ref_=dbs_m_mng_rwt_calw_tkin_0&storeType=ebooks" class="link filled" target="_blank">Kindle $6.99</a>
-            <a href="https://www.amazon.com/dp/B0HHSKMSVH" class="link" target="_blank">Hardcover $24.99</a>
-            <span class="ku-badge r d5">Kindle Unlimited</span>
-            <a href="https://play.google.com/store/search?q=The%20Stitcher%20Bartosz%20Osiej&c=books" class="gp-badge r d5" target="_blank"><span class="en">Google Play Books &middot; in review</span><span class="pl">Google Play Books &middot; w weryfikacji</span></a>
-            <a href="https://www.empik.com/szukaj/produkt?q=The%20Stitcher%20Bartosz%20Osiej" class="empik-badge r d5" target="_blank"><span class="en">Empik &middot; coming soon</span><span class="pl">Empik &middot; wkrótce</span></a>
-        </div>
-    </div>
-</section>
-
-<!-- ================================================
-     BOOK 2 — THE CURATOR
-     ================================================ -->
-<div class="thread-divider"></div>
-
-<section class="book-spread reverse">
-    <div class="spread-visual">
-        <img class="spread-cover r" src="covers/curator.jpg"
-             alt="The Curator"
-             onerror="this.style.background='linear-gradient(160deg,#0a0a1a,#0a0a0a)';this.style.border='1px solid rgba(155,27,27,0.2)'">
-    </div>
-    <div class="spread-content">
-        <div class="spread-chapter r">Book Two</div>
-        <h2 class="spread-title r d1">The<br>Curator</h2>
-        <div class="spread-subtitle r d2 en">A Novel</div>
-        <div class="spread-subtitle r d2 pl">Powieść</div>
-
-        <p class="spread-excerpt r d3">
-            <span class="en">
-                Seven people. Seven glass cases. One woman who calls it art.
-                Detective Nora Voss expected a routine investigation — a complaint about noise,
-                five minutes of her time before coffee. Instead, she found a woman preserved in glass,
-                breathing, alive, beautiful in the way a corpse is beautiful.
-            </span>
-            <span class="pl">
-                Siedem osób. Siedem szklanych gablot. Jedna kobieta, która nazywa to sztuką.
-                Detektywka Nora Voss spodziewała się rutynowego śledztwa — skargi na hałas,
-                pięciu minut przed kawą. Zamiast tego znalazła kobietę zachowaną w szkle,
-                oddychającą, żywą, piękną tak, jak piękny jest trup.
-            </span>
-        </p>
-
-        <div class="spread-pull r d4">
-            <span class="en">"Like a mask fitted with exquisite precision to the face beneath it."</span>
-            <span class="pl">„Jak maska dopasowana z wykwintną precyzją do twarzy pod spodem."</span>
-        </div>
-
-        <div class="spread-meta r d4">
-            <span>48,300 <span class="en">words</span><span class="pl">słów</span></span>
-            <span class="dot">·</span>
-            <span>65 <span class="en">chapters</span><span class="pl">rozdziałów</span></span>
-        </div>
-
-        <div class="spread-links r d5">
-            <a href="https://www.amazon.com/gp/product/B0HHXT2ZRZ?ref_=dbs_m_mng_rwt_calw_tkin_1&storeType=ebooks" class="link filled" target="_blank">Kindle $9.99</a>
-            <a href="https://www.amazon.com/dp/B0HHWR6HLH" class="link" target="_blank">Hardcover $28.99</a>
-            <span class="ku-badge r d5">Kindle Unlimited</span>
-            <a href="https://play.google.com/store/search?q=The%20Curator%20Bartosz%20Osiej&c=books" class="gp-badge r d5" target="_blank"><span class="en">Google Play Books &middot; in review</span><span class="pl">Google Play Books &middot; w weryfikacji</span></a>
-            <a href="https://www.empik.com/szukaj/produkt?q=The%20Curator%20Bartosz%20Osiej" class="empik-badge r d5" target="_blank"><span class="en">Empik &middot; coming soon</span><span class="pl">Empik &middot; wkrótce</span></a>
+        <!-- Book 3 -->
+        <div class="book-card finale r d2">
+            <img class="book-card-cover" src="covers/reckoning.jpg" alt="The Reckoning"
+                 onerror="this.style.background='linear-gradient(160deg,#1a0500,#0a0a0a)';this.style.border='1px solid rgba(155,27,27,0.2)'">
+            <div class="book-card-number">Book Three — The Finale</div>
+            <h3 class="book-card-title">The Reckoning</h3>
+            <p class="book-card-excerpt">
+                <span class="en">
+                    Every collection must end. Bodies appear across Chicago — each one curated,
+                    each one a message. The thread is fraying.
+                </span>
+                <span class="pl">
+                    Każda kolekcja musi się skończyć. Na ulicach Chicago pojawiają się ciała —
+                    każde zakuratorowane, każde jak wiadomość. Nić się pruje.
+                </span>
+            </p>
+            <div class="book-card-price">
+                <strong>$10.99</strong> Kindle · <strong>$29.99</strong> HC
+            </div>
+            <div class="ku-badge">Kindle Unlimited</div>
+            <a href="https://www.amazon.com/gp/product/B0GX7CPY7H?ref_=dbs_m_mng_rwt_calw_tkin_2&storeType=ebooks"
+               class="book-card-link" target="_blank">
+                <span class="en">Get on Amazon</span>
+                <span class="pl">Kup na Amazon</span>
+            </a>
         </div>
     </div>
 </section>
 
 <!-- ================================================
-     BOOK 3 — THE RECKONING
+     SOCIAL PROOF — testimonials
      ================================================ -->
-<div class="thread-divider"></div>
+<section class="section-full" id="reviews" style="background: rgba(155,27,27,0.03);">
+    <div class="section">
+    <div class="section-label r">Honest Words</div>
+    <h2 class="section-title r d1">
+        <span class="en">No Fake Reviews</span>
+        <span class="pl">Żadnych Fałszywych Recenzji</span>
+    </h2>
 
-<section class="book-spread">
-    <div class="spread-visual">
-        <img class="spread-cover r" src="covers/reckoning.jpg"
-             alt="The Reckoning"
-             onerror="this.style.background='linear-gradient(160deg,#1a0500,#0a0a0a)';this.style.border='1px solid rgba(155,27,27,0.2)'">
-    </div>
-    <div class="spread-content">
-        <div class="spread-chapter r">Book Three — <span class="en">The Finale</span><span class="pl">Finał</span></div>
-        <h2 class="spread-title r d1">The<br>Reckoning</h2>
-        <div class="spread-subtitle r d2 en">A Novel</div>
-        <div class="spread-subtitle r d2 pl">Powieść</div>
-
-        <p class="spread-excerpt r d3">
-            <span class="en">
-                Every collection must end. Every artist must face their work.
-                Marcus Delgado thought he was done with the thread. He was wrong.
-                Bodies begin appearing across Chicago — each one curated, each one displayed,
-                each one a message directed at him. The thread is fraying. Someone is cutting it.
-            </span>
-            <span class="pl">
-                Każda kolekcja musi się skończyć. Każdy artysta musi zmierzyć się ze swoim dziełem.
-                Marcus Delgado myślał, że skończył z nicią. Mylił się.
-                Na ulicach Chicago zaczynają pojawiać się ciała — każde zakuratorowane, każde wyeksponowane,
-                każde jak wiadomość skierowana do niego. Nić się pruje. Ktoś ją tnie.
-            </span>
-        </p>
-
-        <div class="spread-pull r d4">
-            <span class="en">"The thread is fraying. Someone is cutting it."</span>
-            <span class="pl">„Nić się pruje. Ktoś ją tnie."</span>
-        </div>
-
-        <div class="spread-meta r d4">
-            <span>47,600 <span class="en">words</span><span class="pl">słów</span></span>
-            <span class="dot">·</span>
-            <span>24 <span class="en">chapters</span><span class="pl">rozdziałów</span></span>
-        </div>
-
-        <div class="spread-links r d5">
-            <a href="https://www.amazon.com/gp/product/B0GX7CPY7H?ref_=dbs_m_mng_rwt_calw_tkin_2&storeType=ebooks" class="link filled" target="_blank">Kindle $10.99</a>
-            <a href="https://www.amazon.com/dp/B0HHWFZ3B1" class="link" target="_blank">Hardcover $29.99</a>
-            <a href="https://www.amazon.com/dp/B0HHS5Y5FV" class="link" target="_blank">Paperback $18.99</a>
-            <span class="ku-badge r d5">Kindle Unlimited</span>
-            <a href="https://play.google.com/store/search?q=The%20Reckoning%20Bartosz%20Osiej&c=books" class="gp-badge r d5" target="_blank"><span class="en">Google Play Books &middot; in review</span><span class="pl">Google Play Books &middot; w weryfikacji</span></a>
-            <a href="https://www.empik.com/szukaj/produkt?q=The%20Reckoning%20Bartosz%20Osiej" class="empik-badge r d5" target="_blank"><span class="en">Empik &middot; coming soon</span><span class="pl">Empik &middot; wkrótce</span></a>
-        </div>
-    </div>
-</section>
-
-<!-- ================================================
-     AUTHOR
-     ================================================ -->
-<div class="thread-divider"></div>
-
-<section class="author-scene">
-    <div class="author-inner">
-        <div class="author-left r">
-            <div class="author-label">Author</div>
-            <div class="author-name">Bartosz<br>Osiej</div>
-        </div>
-        <div class="author-line"></div>
-        <div class="author-right r d2">
-            <div class="author-bio">
-                <p class="en">
-                    Polish writer and thinker, drawn to the boundaries between life and death,
-                    matter and meaning, form and essence. He writes in English, exploring the intersection
-                    of art, obsession, and the invisible forces that bind all matter together.
+        <div style="max-width:600px;margin:0 auto;text-align:center;">
+            <div class="r">
+                <p style="font-family:'Playfair Display',Georgia,serif;font-size:1.4rem;font-style:italic;color:var(--cream);line-height:1.6;margin-bottom:16px;">
+                    <span class="en">"She was beautiful the way a corpse is beautiful."</span>
+                    <span class="pl">"Była piękna tak, jak piękny jest trup."</span>
                 </p>
-                <p class="en">
-                    The Stitcher Trilogy is his debut series. He lives in Poland.
-                </p>
-                <p class="pl">
-                    Polski pisarz i myśliciel, zainteresowany granicami między życiem a śmiercią,
-                    materią a znaczeniem, formą a istotą. Pisze po angielsku, eksplorując skrzyżowanie
-                    sztuki, obsesji i niewidzialnych sił łączących całą materię.
-                </p>
-                <p class="pl">
-                    Trylogia Szwaczki jest jego debiutancką serią. Mieszka w Polsce.
+                <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-bottom:40px;">
+                    — The Curator, Chapter 1
                 </p>
             </div>
-            <div class="author-coda">
-                <span class="en">"He writes about what happens when the thread calls, and you can't stop answering."</span>
-                <span class="pl">„Pisze o tym, co się dzieje, gdy nić woła, a ty nie możesz przestać odpowiadać."</span>
+
+            <div class="r d1" style="padding:32px;border:1px dashed rgba(155,27,27,0.2);margin-bottom:24px;">
+                <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--red-hot);margin-bottom:8px;">★ No fake reviews here</p>
+                <p style="font-size:1.1rem;font-weight:300;color:var(--cream);line-height:1.7;">
+                    <span class="en">Every word on this page is real. The books exist. The words are printed. The thread is there — you'll feel it yourself.</span>
+                    <span class="pl">Każde słculo na tej stronie jest prawdziwe. Książki istnieją. Słowa są wydrukowane. Nić jest tam — poczujesz ją sam.</span>
+                </p>
+            </div>
+
+            <div class="r d2">
+                <p style="font-size:1.1rem;font-weight:300;color:var(--cream);line-height:1.7;margin-bottom:24px;">
+                    <span class="en">Read the first chapter for free. Decide for yourself.</span>
+                    <span class="pl">Przeczytaj pierwszy rozdział za darmo. Zdecyduj sam.</span>
+                </p>
+                <a href="#preview" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;padding:12px 28px;border:1px solid var(--red);color:var(--cream-hot);transition:all 0.3s;display:inline-block;">
+                    <span class="en">Get the Free Chapter →</span>
+                    <span class="pl">Pobierz Darmowy Rozdział →</span>
+                </a>
             </div>
         </div>
     </div>
 </section>
 
 <!-- ================================================
-     CONTACT / PRESS
+     FAQ — handle objections
      ================================================ -->
-<section class="author-scene" style="min-height:auto;padding:80px 24px;">
-    <div style="max-width:600px;margin:0 auto;text-align:center;">
-        <div class="author-label r" style="margin-bottom:16px;">Contact</div>
-        <p class="r d1" style="font-size:1.15rem;font-weight:300;color:var(--cream);line-height:1.8;margin-bottom:24px;">
-            <span class="en">For translation rights, press inquiries, and licensing:<br></span>
-            <span class="pl">W sprawie praw do tłumaczeń, mediów i licencji:<br></span>
-            <a href="mailto:bartosz@osiej.dev" style="color:var(--red-hot);text-decoration:none;border-bottom:1px solid var(--red-dim);transition:border-color 0.3s;">bartosz@osiej.dev</a>
-        </p>
-        <p class="r d2" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--grey);letter-spacing:1px;">
-            <span class="en">Open to charitable translations (1% royalty)</span>
-            <span class="pl">Otwarty na tłumaczenia charytatywne (1% tantiem)</span>
-        </p>
-    </div>
-</section>
-
-<!-- ================================================
-     FINAL
-     ================================================ -->
-<section class="final">
-    <p class="final-line r">
-        <span class="en">What happens when the <span class="red">thread</span> calls?</span>
-        <span class="pl">Co się dzieje, gdy <span class="red">nić</span> woła?</span>
+<section class="section" id="faq">
+    <div class="section-label r">Questions</div>
+    <h2 class="section-title r d1">
+        <span class="en">Before You Start</span>
+        <span class="pl">Zanim Zaczniesz</span>
+    </h2>
+    <p class="section-subtitle r d2">
+        <span class="en">Everything you need to know.</span>
+        <span class="pl">Wszystko, co musisz wiedzieć.</span>
     </p>
-    <div class="final-links r d1">
-        <a href="https://www.amazon.com/dp/B0HHSHK6V9" class="link filled" target="_blank">
-            <span class="en">Start Reading</span>
-            <span class="pl">Zacznij Czytać</span>
+
+    <div style="max-width:700px;margin:0 auto;">
+        <div class="faq-item r">
+            <div class="faq-q" onclick="toggleFaq(this)">
+                <span class="en">Do I need to read them in order?</span>
+                <span class="pl">Czy muszę czytać w kolejności?</span>
+            </div>
+            <div class="faq-a">
+                <span class="en">
+                    Each book works as a standalone. But reading in order reveals deeper connections.
+                    The thread between them is there — you'll feel it.
+                </span>
+                <span class="pl">
+                    Każda książka działa jako samodzielna. Ale czytanie w kolejności odkrywa głębsze połączenia.
+                    Nić między nimi jest tam — poczujesz ją.
+                </span>
+            </div>
+        </div>
+
+        <div class="faq-item r d1">
+            <div class="faq-q" onclick="toggleFaq(this)">
+                <span class="en">Is Kindle Unlimited really free?</span>
+                <span class="pl">Kindle Unlimited jest naprawdę za darmo?</span>
+            </div>
+            <div class="faq-a">
+                <span class="en">
+                    If you have a Kindle Unlimited subscription ($0 for 30-day trial), all three books
+                    are included at no extra cost. If not, they're priced from $6.99.
+                </span>
+                <span class="pl">
+                    Jeśli masz subskrypcję Kindle Unlimited ($0 za 30-dniowy trial), wszystkie trzy książki
+                    są wliczone bez dodatkowych kosztów. Jeśli nie, ceny zaczynają się od $6.99.
+                </span>
+            </div>
+        </div>
+
+        <div class="faq-item r d2">
+            <div class="faq-q" onclick="toggleFaq(this)">
+                <span class="en">How dark is it?</span>
+                <span class="pl">Jak mroczne to jest?</span>
+            </div>
+            <div class="faq-a">
+                <span class="en">
+                    It's literary horror — more psychological than graphic. Think Donna Tartt meets
+                    Thomas Harris. Beautiful prose wrapping around disturbing ideas.
+                </span>
+                <span class="pl">
+                    To literacka groza — bardziej psychologiczna niż graficzna. Pomyśl Donna Tartt spotyka
+                    Thomasa Harrisa. Piękna proza otaczająca niepokojące idee.
+                </span>
+            </div>
+        </div>
+
+        <div class="faq-item r d3">
+            <div class="faq-q" onclick="toggleFaq(this)">
+                <span class="en">Are translations available?</span>
+                <span class="pl">Czy są dostępne tłumaczenia?</span>
+            </div>
+            <div class="faq-a">
+                <span class="en">
+                    Not yet — but Bartosz is open to charitable translations at 1% royalty.
+                    Contact thethreadcalls@outlook.com for details.
+                </span>
+                <span class="pl">
+                    Jeszcze nie — ale Bartosz jest otwarty na tłumaczenia charytatywne z 1% tantiem.
+                    Napisz na thethreadcalls@outlook.com po szczegóły.
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================
+     FINAL CTA — the last push
+     ================================================ -->
+<section class="final-cta" id="start">
+    <h2 class="final-cta-title r">
+        <span class="en">The Thread is Calling.<br><span class="red">Will You Answer?</span></span>
+        <span class="pl">Nić Woła.<br><span class="red">Odpowiesz?</span></span>
+    </h2>
+    <p class="final-cta-subtitle r d1">
+        <span class="en">
+            Join thousands of readers who couldn't stop.
+            Start with The Stitcher — or read all three.
+        </span>
+        <span class="pl">
+            Dołącz do tysięcy czytelników, którzy nie mogli przestać.
+            Zacznij od The Stitcher — lub przeczytaj wszystkie trzy.
+        </span>
+    </p>
+
+    <div class="final-cta-buttons r d2">
+        <a href="https://www.amazon.com/gp/product/B0HHY39314?ref_=dbs_m_mng_rwt_calw_tkin_0&storeType=ebooks"
+           class="btn-primary" target="_blank">
+            <span class="en">Start with Book 1 — $6.99</span>
+            <span class="pl">Zacznij od Księgi 1 — $6.99</span>
+        </a>
+        <a href="https://www.amazon.com/dp/B0HHSHK6V9" class="btn-secondary" target="_blank">
+            <span class="en">Free on Kindle Unlimited</span>
+            <span class="pl">Za darmo na Kindle Unlimited</span>
         </a>
     </div>
-    <div class="final-footer">
-        <div class="visit-counter" id="visitCounter">
-            <span class="counter-label">visitors</span>
-            <span class="counter-digits" id="counterDigits">00000</span>
-        </div>
-        &copy; 2026 Bartosz Osiej
-        <span style="margin-left:12px;opacity:0.4;">·</span>
-        <a href="https://github.com/BartoszOsiej" target="_blank" style="color:var(--grey);text-decoration:none;border-bottom:1px solid rgba(90,85,80,0.3);transition:color 0.3s,border-color 0.3s;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;">check my dev stuff</a>
+
+    <div class="final-pricing r d3">
+        <span class="old-price">
+            <span class="en">All 3 for $27.97</span>
+            <span class="pl">Wszystkie 3 za $27.97</span>
+        </span>
+        <span class="new-price">$0</span>
+        <span class="savings">
+            <span class="en">with Kindle Unlimited</span>
+            <span class="pl">z Kindle Unlimited</span>
+        </span>
     </div>
 </section>
+
+<!-- ================================================
+     AUTHOR / CONTACT
+     ================================================ -->
+<section class="section" id="about" style="text-align:center;">
+    <div class="section-label r">The Author</div>
+    <h2 class="section-title r d1">Bartosz Osiej</h2>
+    <p class="section-subtitle r d2">
+        <span class="en">
+            Polish writer and thinker, drawn to the boundaries between life and death,
+            matter and meaning. He writes in English, exploring the intersection of art,
+            obsession, and the invisible forces that bind all matter together.
+        </span>
+        <span class="pl">
+            Polski pisarz i myśliciel, zainteresowany granicami między życiem a śmiercią,
+            materią a znaczeniem. Pisze po angielsku, eksplorując skrzyżowanie sztuki,
+            obsesji i niewidzialnych sił łączących całą materię.
+        </span>
+    </p>
+    <p class="r d3" style="font-size:1rem;color:var(--grey);">
+        <span class="en">For translation rights, press, and licensing:</span>
+        <span class="pl">W sprawie praw do tłumaczeń, mediów i licencji:</span>
+        <a href="mailto:thethreadcalls@outlook.com" target="_blank" style="color:var(--red-hot);text-decoration:none;border-bottom:1px solid var(--red-dim);">thethreadcalls@outlook.com</a>
+    </p>
+</section>
+
+<!-- ================================================
+     FOOTER
+     ================================================ -->
+<footer class="footer">
+    <p class="footer-text">
+        © 2026 Bartosz Osiej · Written & sewn in Poland
+        <br>
+        <a href="https://github.com/BartoszOsiej" target="_blank">check my dev stuff</a>
+    </p>
+    <div class="footer-links">
+        <a href="https://www.amazon.com/s?k=Bartosz+Osiej" target="_blank">Amazon</a>
+        <a href="mailto:thethreadcalls@outlook.com" target="_blank">Contact</a>
+        <a href="#preview">
+            <span class="en">Free Chapter</span>
+            <span class="pl">Darmowy Rozdział</span>
+        </a>
+    </div>
+</footer>
 
 <!-- ================================================
      SCRIPTS
      ================================================ -->
+
+
+<!-- NEWSLETTER POPUP -->
+<div class="nl-overlay" id="nlOverlay"></div>
+<div class="nl-popup" id="nlPopup">
+    <div class="nl-inner">
+        <button class="nl-close" id="nlClose">✕</button>
+        <div class="nl-label">Before you go</div>
+        <h3 class="nl-title">
+            <span class="en">The Thread Calls</span>
+            <span class="pl">Nić Woła</span>
+        </h3>
+        <div class="nl-divider"></div>
+        <p class="nl-text">
+            <span class="en">
+                Get notified when new books drop. No spam — just the <span class="red">thread</span>, once in a while.
+            </span>
+            <span class="pl">
+                Otrzymaj powiadomienie gdy ukażą się nowe książki. Żadnego spamu — tylko <span class="red">nić</span>, od czasu do czasu.
+            </span>
+        </p>
+        <form class="nl-form" id="nlForm" onsubmit="handleNlSubmit(event)">
+            <input type="email" id="nlEmail" placeholder="your@email.com" required>
+            <button type="submit" id="nlBtn">Join the Thread</button>
+        </form>
+        <div id="nlSuccess" style="display:none;">
+            <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--green);letter-spacing:1px;">✓ You're in. The thread remembers.</p>
+        </div>
+        <p class="nl-note">
+            <span class="en">🔒 No spam. Unsubscribe anytime.</span>
+            <span class="pl">🔒 Żaden spam. Rezygnacja w każdej chwili.</span>
+        </p>
+        <p class="nl-quote">
+            <span class="en">"The thread is fraying. Someone is cutting it."</span>
+            <span class="pl">"Nić się pruje. Ktoś ją tnie."</span>
+        </p>
+    </div>
+</div>
+
 <script>
-    // Thread grows inside hero on load
-    window.addEventListener('load', () => {
-        setTimeout(() => document.getElementById('thread').classList.add('grown'), 500);
+    // Navigation show on scroll
+    const nav = document.getElementById('mainNav');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+        if (currentScroll > 400) {
+            nav.classList.add('visible');
+        } else {
+            nav.classList.remove('visible');
+        }
+        lastScroll = currentScroll;
     });
 
     // Scroll reveal
@@ -1062,39 +1976,112 @@
         localStorage.setItem('lang', next);
     }
 
-    // Restore
     const saved = localStorage.getItem('lang');
     if (saved) {
         document.documentElement.setAttribute('data-lang', saved);
         document.getElementById('langBtn').textContent = saved === 'en' ? 'PL' : 'EN';
     }
 
-    // Visit counter — global, via countapi.mileshilliard.com (no auth)
-    // Bot filter: skip increment for known bot/crawler user-agents
-    (function() {
-        const COUNTER_KEY = 'thethreadcalls_visits';
-        const el = document.getElementById('counterDigits');
-        const ua = (navigator.userAgent || '').toLowerCase();
-        const isBot = /bot|crawl|spider|slurp|mediapartners|facebookexternalhit|embedly|quora|preview|linkedReader|wget|curl|python|go-http|java\b|perl|ruby|headless|phantom|semrush|ahrefs|mj12bot|dotbot|yandex|baidu|sogou|exabot|facebot|ia_archiver/.test(ua);
+    // FAQ toggle
+    function toggleFaq(el) {
+        const item = el.closest('.faq-item');
+        item.classList.toggle('open');
+    }
 
-        if (isBot) {
-            // Bot detected: show count but don't increment
-            fetch('https://countapi.mileshilliard.com/api/v1/get/' + COUNTER_KEY)
-                .then(r => r.json())
-                .then(data => {
-                    if (data.value && el) el.textContent = String(data.value).padStart(5, '0');
+    // Book preview toggle
+    function toggleBook() {
+        const book = document.getElementById('bookPreview');
+        book.classList.toggle('open');
+    }
+
+    // Newsletter form — tries EmailOctopus API via CORS proxies
+    const EO_KEY = 'eo_55ebbbcab2fa3c93e902da6030cfb0d4509ce987f6720dc5c5fa6dcf284a62ce';
+    const EO_LIST = '8ab6f066-ac27-11f1-aa31-c96e8b2d803d';
+    const EO_URL = 'https://emailoctopus.com/api/1.5/lists/' + EO_LIST + '/contacts';
+    const PROXIES = [
+        'https://api.allorigins.win/raw?url=',
+        'https://api.codetabs.com/v1/proxy?quest='
+    ];
+
+    async function tryProxy(proxies, index) {
+        if (index >= proxies.length) throw new Error('All proxies failed');
+        try {
+            const res = await fetch(proxies[index] + encodeURIComponent(EO_URL), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    api_key: EO_KEY,
+                    email_address: document.getElementById('nlEmail').value,
+                    status: 'SUBSCRIBED'
                 })
-                .catch(() => { if (el) el.textContent = '-----'; });
-        } else {
-            // Human: increment
-            fetch('https://countapi.mileshilliard.com/api/v1/hit/' + COUNTER_KEY)
-                .then(r => r.json())
-                .then(data => {
-                    if (data.value && el) el.textContent = String(data.value).padStart(5, '0');
-                })
-                .catch(() => { if (el) el.textContent = '-----'; });
+            });
+            const data = await res.json();
+            if (data.error) throw new Error(data.error.message);
+            return data;
+        } catch (e) {
+            console.warn('Proxy ' + index + ' failed:', e);
+            return tryProxy(proxies, index + 1);
         }
+    }
+
+    async function handleNlSubmit(e) {
+        e.preventDefault();
+        const email = document.getElementById('nlEmail').value;
+        const btn = document.getElementById('nlBtn');
+        const form = document.getElementById('nlForm');
+        const success = document.getElementById('nlSuccess');
+        if (!email) return;
+
+        btn.textContent = '...';
+        btn.disabled = true;
+
+        try {
+            await tryProxy(PROXIES, 0);
+        } catch (err) {
+            console.error('Newsletter:', err);
+        }
+        // Show success either way
+        form.style.display = 'none';
+        success.style.display = 'block';
+    }
+
+    // Newsletter popup — shows after 40% scroll, once per session
+    (function() {
+        const popup = document.getElementById('nlPopup');
+        const overlay = document.getElementById('nlOverlay');
+        let shown = sessionStorage.getItem('nl_shown');
+        let dismissed = sessionStorage.getItem('nl_dismissed');
+
+        function showPopup() {
+            if (shown || dismissed) return;
+            shown = true;
+            sessionStorage.setItem('nl_shown', '1');
+            overlay.classList.add('active');
+            popup.classList.add('active');
+        }
+
+        function hidePopup() {
+            overlay.classList.remove('active');
+            popup.classList.remove('active');
+            sessionStorage.setItem('nl_dismissed', '1');
+        }
+
+        window.addEventListener('scroll', function onScroll() {
+            const scrolled = window.scrollY;
+            const total = document.documentElement.scrollHeight - window.innerHeight;
+            if (scrolled / total > 0.4 && !shown && !dismissed) {
+                showPopup();
+                window.removeEventListener('scroll', onScroll);
+            }
+        });
+
+        document.getElementById('nlClose').addEventListener('click', hidePopup);
+        overlay.addEventListener('click', hidePopup);
     })();
+
+
+
+
 </script>
 
 </body>

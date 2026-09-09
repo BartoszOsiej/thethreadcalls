@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Check Your Inbox — The Stitcher Trilogy</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root{
+    --black:#080808;
+    --red:#9b1b1b;
+    --red-hot:#c62828;
+    --red-dim:#3a0808;
+    --cream:#d4c8b8;
+    --cream-hot:#efe6d5;
+    --grey:#5a5550;
+    --green:#4caf50;
+    --green-dim:#1a6b3c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--black);
+    color:var(--cream);
+    font-family:"Cormorant Garamond",Georgia,serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 20px;
+  }
+  body::-webkit-scrollbar{width:10px}
+  body::-webkit-scrollbar-track{background:var(--black)}
+  body::-webkit-scrollbar-thumb{background:linear-gradient(var(--red-hot),var(--red-dim))}
+  ::selection{background:var(--red-hot);color:var(--cream-hot)}
+
+  .card{
+    max-width:560px;
+    width:100%;
+    text-align:center;
+    padding:48px 32px;
+    border:1px solid rgba(155,27,27,0.15);
+    background:rgba(155,27,27,0.03);
+    position:relative;
+    overflow:hidden;
+  }
+  .card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(155,27,27,0.08) 0%,transparent 70%);
+    pointer-events:none;
+  }
+
+  .check-icon{
+    font-size:48px;
+    margin-bottom:20px;
+    position:relative;
+    animation:popIn 0.6s cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+
+  h1{
+    font-family:"Playfair Display",Georgia,serif;
+    font-size:clamp(1.8rem,5vw,2.5rem);
+    font-weight:900;
+    color:var(--cream-hot);
+    line-height:1.1;
+    margin-bottom:12px;
+    position:relative;
+  }
+
+  .subtitle{
+    font-size:1.15rem;
+    font-weight:300;
+    color:var(--cream);
+    margin-bottom:32px;
+    position:relative;
+    line-height:1.7;
+  }
+
+  .subtitle strong{color:var(--red-hot);font-weight:600;}
+
+  .divider{
+    width:1px;
+    height:60px;
+    background:linear-gradient(to bottom,transparent,var(--red-dim),transparent);
+    margin:32px auto;
+  }
+
+  .next-steps{
+    text-align:left;
+    margin:32px 0;
+    position:relative;
+  }
+  .next-steps h2{
+    font-family:"Playfair Display",Georgia,serif;
+    font-size:1.3rem;
+    font-weight:700;
+    color:var(--cream-hot);
+    margin-bottom:16px;
+    text-align:center;
+  }
+  .step{
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    padding:14px 0;
+    border-bottom:1px solid rgba(155,27,27,0.08);
+  }
+  .step:last-child{border-bottom:none;}
+  .step-num{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:11px;
+    color:var(--red-hot);
+    min-width:24px;
+    padding-top:2px;
+  }
+  .step-text{
+    font-size:1.05rem;
+    color:var(--cream);
+  }
+  .step-text a{
+    color:var(--red-hot);
+    text-decoration:none;
+    border-bottom:1px solid var(--red-dim);
+    transition:border-color 0.3s;
+  }
+  .step-text a:hover{border-color:var(--red-hot);}
+
+  .covers{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    margin:28px 0;
+    position:relative;
+  }
+  .covers a{text-decoration:none}
+  .covers img{
+    width:100%;
+    aspect-ratio:2/3;
+    object-fit:cover;
+    border-radius:4px;
+    display:block;
+    transition:transform 0.5s cubic-bezier(.2,.8,.2,1), box-shadow 0.5s ease;
+  }
+  .covers a:hover img{
+    transform:translateY(-4px) rotateZ(-1deg);
+    box-shadow:0 14px 40px -10px rgba(198,40,40,.5);
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 28px;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--cream-hot);
+    background:linear-gradient(135deg,var(--red) 0%,var(--red-hot) 100%);
+    border:1px solid rgba(255,255,255,.12);
+    position:relative;
+    overflow:hidden;
+    clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);
+    transition:transform .25s ease, filter .25s ease;
+  }
+  .btn::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(115deg,transparent 25%,rgba(255,255,255,.35) 50%,transparent 75%);
+    transform:translateX(-110%);
+    transition:transform .9s cubic-bezier(.4,0,.2,1);
+  }
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.12)}
+  .btn:hover::after{transform:translateX(110%)}
+
+  .btn-secondary{
+    display:inline-flex;
+    padding:14px 28px;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:12px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--cream);
+    border:1px solid var(--grey);
+    transition:all 0.3s;
+  }
+  .btn-secondary:hover{border-color:var(--cream-hot);color:var(--cream-hot);}
+
+  .row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:28px 0 8px}
+
+  .ku-badge{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:10px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    padding:8px 14px;
+    border:1px solid var(--green-dim);
+    color:var(--green);
+    background:rgba(26,107,60,0.08);
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin:16px 0;
+  }
+  .ku-badge::before{content:'✓';font-size:12px;}
+
+  .note{
+    font-size:14px;
+    color:var(--grey);
+    border-top:1px dashed rgba(90,85,80,.4);
+    border-bottom:1px dashed rgba(90,85,80,.4);
+    padding:14px 0;
+    margin:24px 0;
+    text-align:center;
+    position:relative;
+  }
+  .note strong{color:var(--red-hot);font-weight:700;}
+
+  .muted{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:10px;
+    letter-spacing:.08em;
+    text-align:center;
+    color:var(--grey);
+    padding:24px 0 0;
+    position:relative;
+  }
+  .muted a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+
+  @keyframes popIn{
+    from{opacity:0;transform:scale(0.5)}
+    to{opacity:1;transform:scale(1)}
+  }
+
+  @media(max-width:480px){
+    .card{padding:32px 20px;}
+    .covers{grid-template-columns:repeat(3,1fr);gap:8px;}
+    .row{flex-direction:column;align-items:center;}
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+
+    <div class="check-icon">✓</div>
+
+    <h1>Check Your Inbox</h1>
+
+    <p class="subtitle">
+      Your <strong>free chapter</strong> of The Stitcher is on its way.<br>
+      Check your spam folder if you don't see it within 2 minutes.
+    </p>
+
+    <div class="divider"></div>
+
+    <div class="next-steps">
+      <h2>While You Wait — 3 Things</h2>
+
+      <div class="step">
+        <span class="step-num">01</span>
+        <p class="step-text">
+          <strong>Whitelist our email</strong> so future chapters (if we release more) land in your inbox, not spam.
+        </p>
+      </div>
+
+      <div class="step">
+        <span class="step-num">02</span>
+        <p class="step-text">
+          <strong>Browse the trilogy</strong> — all three books are on
+          <a href="https://www.amazon.com/s?k=Bartosz+Osiej" target="_blank">Amazon</a> and
+          <strong>Kindle Unlimited</strong>.
+        </p>
+      </div>
+
+      <div class="step">
+        <span class="step-num">03</span>
+        <p class="step-text">
+          <strong>Share with a friend</strong> who loves dark literary horror. The thread grows stronger with every reader.
+        </p>
+      </div>
+    </div>
+
+    <div class="covers">
+      <a href="https://www.amazon.com/dp/B0HHY39314" target="_blank"><img src="https://bartoszosiej.github.io/thethreadcalls/covers/stitcher.jpg" alt="The Stitcher"></a>
+      <a href="https://www.amazon.com/dp/B0HHXT2ZRZ" target="_blank"><img src="https://bartoszosiej.github.io/thethreadcalls/covers/curator.jpg" alt="The Curator"></a>
+      <a href="https://www.amazon.com/dp/B0GX7CPY7H" target="_blank"><img src="https://bartoszosiej.github.io/thethreadcalls/covers/reckoning.jpg" alt="The Reckoning"></a>
+    </div>
+
+    <div class="ku-badge">All 3 free on Kindle Unlimited</div>
+
+    <div class="row">
+      <a class="btn" href="https://www.amazon.com/dp/B0HHSHK6V9" target="_blank">Start Reading</a>
+      <a class="btn-secondary" href="https://bartoszosiej.github.io/thethreadcalls/" target="_blank">Back to Site</a>
+    </div>
+
+    <p class="note">
+      Everything on <strong>Kindle Unlimited</strong> — $0 upfront.<br>
+      Translations welcome — <strong>charitable only, 1% royalty</strong>.
+    </p>
+
+    <p class="muted">
+      written &amp; sewn by Bartosz Osiej — <a href="https://github.com/BartoszOsiej" target="_blank">check my dev stuff</a><br>
+      &copy; 2026 Bartosz Osiej
+    </p>
+
+  </div>
+</body>
+</html>
