@@ -13,7 +13,9 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="The Stitcher Trilogy: Dark Literary Horror Novels">
     <meta property="og:description" content="Three dark literary horror novels about obsession, silk, and the thin line between art and madness. Read Chapter 1 free. Kindle Unlimited available.">
-    <meta property="og:image" content="https://bartoszosiej.github.io/thethreadcalls/covers/stitcher.jpg">
+    <meta property="og:image" content="https://bartoszosiej.github.io/thethreadcalls/covers/og-banner.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:url" content="https://bartoszosiej.github.io/thethreadcalls/">
     <meta property="og:site_name" content="The Stitcher Trilogy">
     <meta property="og:locale" content="en_US">
@@ -22,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="The Stitcher Trilogy: Dark Literary Horror Novels">
     <meta name="twitter:description" content="Three dark literary horror novels about obsession, silk, and the thin line between art and madness. Read Chapter 1 free.">
-    <meta name="twitter:image" content="https://bartoszosiej.github.io/thethreadcalls/covers/stitcher.jpg">
+    <meta name="twitter:image" content="https://bartoszosiej.github.io/thethreadcalls/covers/og-banner.jpg">
     <meta name="twitter:site" content="@BartoszOsiej">
     <meta name="author" content="Bartosz Osiej">
 
@@ -1216,7 +1218,8 @@
             gap: 12px;
         }
 
-        .nl-form input[type="email"] {
+        .nl-form input[type="email"],
+        .nl-form input[type="text"] {
             font-family: 'IBM Plex Mono', monospace;
             font-size: 12px;
             padding: 14px 18px;
@@ -1228,8 +1231,10 @@
             width: 100%;
         }
 
-        .nl-form input[type="email"]::placeholder { color: var(--grey); }
-        .nl-form input[type="email"]:focus { border-color: var(--red-hot); }
+        .nl-form input[type="email"]::placeholder,
+        .nl-form input[type="text"]::placeholder { color: var(--grey); }
+        .nl-form input[type="email"]:focus,
+        .nl-form input[type="text"]:focus { border-color: var(--red-hot); }
 
         .nl-form button {
             font-family: 'IBM Plex Mono', monospace;
@@ -1948,12 +1953,17 @@
             </span>
         </p>
         <form class="nl-form" id="nlForm" onsubmit="handleNlSubmit(event)">
+            <input type="text" id="nlFirstName" placeholder="First name" required>
             <input type="email" id="nlEmail" placeholder="your@email.com" required>
             <button type="submit" id="nlBtn">Join the Thread</button>
         </form>
         <div id="nlSuccess" style="display:none;">
             <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--green);letter-spacing:1px;">✓ You're in. The thread remembers.</p>
         </div>
+        <p id="nlError" style="display:none;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--red-hot);letter-spacing:1px;">
+            <span class="en">✗ Couldn't reach the thread. Try again?</span>
+            <span class="pl">✗ Nie udało się. Spróbuj ponownie?</span>
+        </p>
         <p class="nl-note">
             <span class="en">🔒 No spam. Unsubscribe anytime.</span>
             <span class="pl">🔒 Żaden spam. Rezygnacja w każdej chwili.</span>
@@ -2021,21 +2031,39 @@
     const EO_URL = 'https://emailoctopus.com/api/1.5/lists/' + EO_LIST + '/contacts';
     const PROXIES = [
         'https://api.allorigins.win/raw?url=',
-        'https://api.codetabs.com/v1/proxy?quest='
+        'https://api.codetabs.com/v1/proxy?quest=',
+        'https://corsproxy.io/?url='
     ];
+
+    async function fetchWithTimeout(url, opts, ms) {
+        const ctrl = new AbortController();
+        const t = setTimeout(() => ctrl.abort(), ms);
+        try {
+            return await fetch(url, Object.assign({}, opts, { signal: ctrl.signal }));
+        } finally {
+            clearTimeout(t);
+        }
+    }
+
+    function eoPayload() {
+        const first = document.getElementById('nlFirstName').value.trim();
+        const payload = {
+            api_key: EO_KEY,
+            email_address: document.getElementById('nlEmail').value.trim().toLowerCase(),
+            status: 'SUBSCRIBED'
+        };
+        if (first) payload.fields = { FirstName: first };
+        return payload;
+    }
 
     async function tryProxy(proxies, index) {
         if (index >= proxies.length) throw new Error('All proxies failed');
         try {
-            const res = await fetch(proxies[index] + encodeURIComponent(EO_URL), {
+            const res = await fetchWithTimeout(proxies[index] + encodeURIComponent(EO_URL), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    api_key: EO_KEY,
-                    email_address: document.getElementById('nlEmail').value,
-                    status: 'SUBSCRIBED'
-                })
-            });
+                body: JSON.stringify(eoPayload())
+            }, 12000);
             const data = await res.json();
             if (data.error) throw new Error(data.error.message);
             return data;
@@ -2047,23 +2075,35 @@
 
     async function handleNlSubmit(e) {
         e.preventDefault();
-        const email = document.getElementById('nlEmail').value;
+        const email = document.getElementById('nlEmail').value.trim();
         const btn = document.getElementById('nlBtn');
         const form = document.getElementById('nlForm');
         const success = document.getElementById('nlSuccess');
+        const errorEl = document.getElementById('nlError');
         if (!email) return;
+        errorEl.style.display = 'none';
 
         btn.textContent = '...';
         btn.disabled = true;
 
+        let ok = false;
         try {
-            await tryProxy(PROXIES, 0);
+            const data = await tryProxy(PROXIES, 0);
+            ok = !!(data && data.id);
         } catch (err) {
             console.error('Newsletter:', err);
         }
-        // Show success either way
-        form.style.display = 'none';
-        success.style.display = 'block';
+
+        if (ok) {
+            form.style.display = 'none';
+            success.style.display = 'block';
+            btn.textContent = '✓';
+            setTimeout(() => { window.location.href = 'autoresponder.html'; }, 900);
+        } else {
+            btn.textContent = 'Join the Thread';
+            btn.disabled = false;
+            errorEl.style.display = 'block';
+        }
     }
 
     // Newsletter popup — shows after 40% scroll, once per session
